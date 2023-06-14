@@ -10,12 +10,13 @@ final class ListArticlesAction extends ArticleAction
 {
     protected function action(): Response
     {
-        $articles = $this->repository->orderBy('date_creation', 'desc');
+        $articles = $this->repository->findAll();
 
         $articles = array_map(function ($article) {
             return [
                 'title' => $article['titre'],
-                'creation_date' => $article['date_creation']
+                'creation_date' => $article['date_creation'],
+                'url' => "TODO"
             ];
         }, $articles);
 
