@@ -2,12 +2,15 @@
 
 declare(strict_types=1);
 
-use App\Application\Actions\User\ListUsersAction;
+use App\Application\Actions\Article\ListArticlesAction;
 use Slim\App;
 
 return function (App $app) {
 
     define("API_PREFIX", '/api/v1');
 
-    $app->get(API_PREFIX . '/users', ListUsersAction::class);
+    /**
+     * Display all articles as JSON.
+     */
+    $app->get(API_PREFIX . '/articles', ListArticlesAction::class);
 };
