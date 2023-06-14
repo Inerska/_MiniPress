@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\User;
+namespace App\Domain\Category;
 
 use App\Domain\Article\Article;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class User extends Model
+class Category extends Model
 {
-    protected $table = 'users';
+    protected $table = 'categories';
 
-    protected $fillable = ['name', 'email', 'password'];
+    protected $fillable = ['name'];
 
     public function articles(): HasMany
     {
