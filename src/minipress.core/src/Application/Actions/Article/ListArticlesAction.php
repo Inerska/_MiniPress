@@ -10,7 +10,14 @@ final class ListArticlesAction extends ArticleAction
 {
     protected function action(): Response
     {
-        $articles = $this->repository->findAll();
+        $articles = $this->repository->orderBy('date_creation', 'desc');
+
+        $articles = array_map(function ($article) {
+            return [
+                'title' => $article['titre'],
+                'creation_date' => $article['date_creation']
+            ];
+        }, $articles);
 
         $this->logger->info("Articles list was viewed.");
 

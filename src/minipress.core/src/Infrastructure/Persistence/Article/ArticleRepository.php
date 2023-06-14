@@ -14,8 +14,7 @@ final class ArticleRepository implements IRepository
      */
     public function findAll(): array
     {
-        return Article::all()
-            ->toArray();
+        return Article::all()->toArray();
     }
 
     /**
@@ -33,9 +32,7 @@ final class ArticleRepository implements IRepository
      */
     public function first(callable $callback = null): ?object
     {
-        return $callback
-            ? Article::where($callback)->first()
-            : Article::first();
+        return $callback ? Article::where($callback)->first() : Article::first();
     }
 
     /**
@@ -45,5 +42,10 @@ final class ArticleRepository implements IRepository
     public function create(array $data): object
     {
         return Article::create($data);
+    }
+
+    public function orderBy(string $column, string $direction = 'asc'): array
+    {
+        return Article::orderBy($column, $direction)->get()->toArray();
     }
 }

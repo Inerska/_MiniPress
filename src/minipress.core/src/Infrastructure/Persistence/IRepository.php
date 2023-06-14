@@ -13,4 +13,6 @@ interface IRepository
     public function first(callable $callback = null): ?object;
 
     public function create(array $data): ?object;
+
+    public function orderBy(string $column, string $direction = 'asc'): array;
 }
