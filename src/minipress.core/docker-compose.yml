@@ -1,18 +1,34 @@
 version: '3.7'
 
 volumes:
-    logs:
-        driver: local
+  logs:
+    driver: local
+  postgres_data:
 
 services:
-    slim:
-        image: php:latest
-        working_dir: /var/www
-        command: php -S 0.0.0.0:8080 -t public
-        environment:
-            docker: "true"
-        ports:
-            - "8080:8080"
-        volumes:
-            - .:/var/www
-            - logs:/var/www/logs
+  api:
+    image: php:latest
+    working_dir: /var/www
+    command: php -S 0.0.0.0:80 -t public
+    environment:
+      docker: "true"
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www
+      - logs:/var/www/logs
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_PASSWORD: secret
+      POSTGRES_USER: minipress
+      POSTGRES_DB: minipress_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+
+  adminer:
+    image: adminer
+    ports:
+      - "4500:8080"
