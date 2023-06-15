@@ -48,4 +48,9 @@ final class ArticleRepository implements IRepository
     {
         return Article::orderBy($column, $direction)->get()->toArray();
     }
+
+    public function findWhere(string $column, $value): array
+    {
+        return Article::where($column, $value)->get()->toArray();
+    }
 }

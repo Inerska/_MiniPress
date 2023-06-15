@@ -10,6 +10,8 @@ interface IRepository
 
     public function findById(int $id): ?object;
 
+    public function findWhere(string $column, $value): array;
+
     public function first(callable $callback = null): ?object;
 
     public function create(array $data): ?object;

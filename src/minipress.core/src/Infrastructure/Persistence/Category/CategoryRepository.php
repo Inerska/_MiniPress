@@ -36,4 +36,19 @@ final class CategoryRepository implements IRepository
             ->get()
             ->toArray();
     }
+
+    public function findWhere(string $column, $value): array
+    {
+        return Category::where($column, $value)
+            ->get()
+            ->toArray();
+    }
+
+    public function findArticlesByCategoryId(int $id): array
+    {
+        return Category::find($id)
+            ->articles()
+            ->get()
+            ->toArray();
+    }
 }
