@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Application\Actions\Article\GetArticleAction;
 use App\Application\Actions\Article\ListArticlesAction;
 use App\Application\Actions\Category\ListCategoriesAction;
 use Slim\App;
@@ -14,6 +15,8 @@ return function (App $app) {
      * Display all articles as JSON.
      */
     $app->get(API_PREFIX . '/articles', ListArticlesAction::class);
+
+    $app->get(API_PREFIX . '/articles/{id}', GetArticleAction::class);
 
     $app->get(API_PREFIX . '/categories', ListCategoriesAction::class);
 };
