@@ -39,14 +39,17 @@ return function (App $app) {
     /**
      * Admin
      */
+    $app->group(ADMIN_PREFIX, function(App $app) {
+        // Creation of an article
+        $app->get('/articles/create', CreateArticleAction::class);
 
-    // Creation of an article
-    $app->get(ADMIN_PREFIX . '/articles/create', CreateArticleAction::class);
+        // Handle the form submission
+        $app->post('/articles/create', CreateArticleSubmitAction::class);
 
-    // Handle the form submission
-    $app->post(ADMIN_PREFIX . '/articles/create', CreateArticleSubmitAction::class);
+        // Display all articles
+        $app->get('/articles', DisplayArticlesAction::class);
 
-    // Display all articles
-    $app->get(ADMIN_PREFIX . '/articles', DisplayArticlesAction::class);
+    })->add(new AuthenticationMiddleware());
+
 
 };
