@@ -29,7 +29,7 @@ final class ListArticlesAction extends ArticleAction
                 'title' => $article['titre'],
                 'creation_date' => $article['date_creation'],
                 'auteur_id' => $article['auteur_id'],
-                'url' => 'TODO'
+                'url' => "/articles/{$article['id']}",
             ];
         }, $articles);
 
