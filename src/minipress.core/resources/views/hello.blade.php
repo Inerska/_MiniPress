@@ -1,12 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello World</title>
-</head>
-<body>
-<h1>Hello, {{ $name }}!</h1>
-</body>
-</html>
+@extends('layout')
+
+@section('content')
+<h1 class="text-black text-xl">Hello, {{ $name }}!</h1>
+<h2>Hey</h2>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores blanditiis dolores eligendi, enim eos error
+    excepturi ipsa ipsam iusto modi optio placeat recusandae rem sed tempora voluptate voluptates. Omnis,
+    recusandae!</p>
+@endsection
