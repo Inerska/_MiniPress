@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Application\Actions\Article\CreateArticleAction;
+use App\Application\Actions\Article\DisplayArticlesAction;
 use App\Application\Actions\Article\Form\CreateArticleSubmitAction;
 use App\Application\Actions\Article\GetArticleAction;
 use App\Application\Actions\Article\ListArticlesAction;
@@ -40,9 +41,12 @@ return function (App $app) {
      */
 
     // Creation of an article
-    $app->get(ADMIN_PREFIX . '/articles', CreateArticleAction::class);
+    $app->get(ADMIN_PREFIX . '/articles/create', CreateArticleAction::class);
 
     // Handle the form submission
-    $app->post(ADMIN_PREFIX . '/articles', CreateArticleSubmitAction::class);
+    $app->post(ADMIN_PREFIX . '/articles/create', CreateArticleSubmitAction::class);
+
+    // Display all articles
+    $app->get(ADMIN_PREFIX . '/articles', DisplayArticlesAction::class);
 
 };

@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="//cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css"/>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+            integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 </head>
 <body>
 <main class="flex justify-between h-screen">
@@ -24,12 +27,15 @@
             <h1 class="text-xl text-gray-700 font-bold">Admin</h1>
         </a>
         <ul class="font-semibold text-gray-700 mt-4 hover:text-gray-900 transition duration-150">
-            <li><a href="/admin/articles">Créer un article</a></li>
+            <li><a href="/admin/articles">Articles</a></li>
         </ul>
     </section>
     <section class="pl-5 pt-2 w-4/5 flex items-center justify-center">
         @yield('content')
     </section>
 </main>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="//cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 </body>
 </html>
