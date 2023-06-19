@@ -12,17 +12,41 @@ use Slim\App;
 return function (App $app) {
 
     define('API_PREFIX', '/api/v1');
+    define('ADMIN_PREFIX', '/admin');
 
     /**
-     * Display all articles as JSON.
+     * API
      */
+
+    // Retrieve all articles
     $app->get(API_PREFIX . '/articles', ListArticlesAction::class);
 
+    // Retrieve article with id
     $app->get(API_PREFIX . '/articles/{id}', GetArticleAction::class);
 
+    // Retrieve all categories
     $app->get(API_PREFIX . '/categories', ListCategoriesAction::class);
 
+    // Retrieve all articles for a category
     $app->get(API_PREFIX . '/categories/{id}/articles', ListCategoryArticlesAction::class);
 
+    // Retrieve all articles for an author
     $app->get(API_PREFIX . '/auteurs/{id}/articles', ListAuthorArticlesAction::class);
+
+    /**
+     * Admin
+     */
+
+    // routes.php
+    $app->get('/hello/{name}', function ($request, $response, $args) {
+        $name = $args['name'];
+
+        $view = $this->get('view')->make('hello', ['name' => $name])->render();
+
+        $response->getBody()->write($view);
+
+        return $response;
+    });
+
+
 };

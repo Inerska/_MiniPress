@@ -4,6 +4,13 @@ declare(strict_types=1);
 
 use App\Application\Settings\SettingsInterface;
 use DI\ContainerBuilder;
+use Illuminate\Events\Dispatcher;
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\View\Compilers\BladeCompiler;
+use Illuminate\View\Engines\CompilerEngine;
+use Illuminate\View\Engines\EngineResolver;
+use Illuminate\View\Factory;
+use Illuminate\View\FileViewFinder;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Monolog\Processor\UidProcessor;
@@ -26,5 +33,21 @@ return function (ContainerBuilder $containerBuilder) {
 
             return $logger;
         },
+
+        'view' => function () {
+            $paths = [__DIR__ . '/../resources/views'];
+            $cache = __DIR__ . '/../storage/framework/views';
+
+            $filesystem = new Filesystem();
+            $compiler = new BladeCompiler($filesystem, $cache);
+
+            $resolver = new EngineResolver();
+            $resolver->register('blade', function () use ($compiler) {
+                return new CompilerEngine($compiler);
+            });
+
+            $finder = new FileViewFinder($filesystem, $paths);
+            return new Factory($resolver, $finder, new Dispatcher());
+        }
     ]);
 };
