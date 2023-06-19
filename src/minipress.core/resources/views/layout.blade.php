@@ -25,7 +25,7 @@
         </a>
         @yield('navbar')
     </section>
-    <section class="pl-5 pt-2">
+    <section class="pl-5 pt-2 w-4/5 flex items-center justify-center">
         @yield('content')
     </section>
 </main>
