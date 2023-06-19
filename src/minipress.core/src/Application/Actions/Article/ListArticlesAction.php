@@ -16,6 +16,7 @@ final class ListArticlesAction extends ArticleAction
             return [
                 'title' => $article['titre'],
                 'creation_date' => $article['date_creation'],
+                'auteur_id' => $article['auteur_id'],
                 'url' => "TODO"
             ];
         }, $articles);
