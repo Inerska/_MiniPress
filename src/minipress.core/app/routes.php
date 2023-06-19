@@ -41,4 +41,7 @@ return function (App $app) {
     // Creation of an article
     $app->get(ADMIN_PREFIX . '/articles', CreateArticleAction::class);
 
+    // Handle the form submission
+    $app->post(ADMIN_PREFIX . '/articles', CreateArticleSubmitAction::class);
+
 };
