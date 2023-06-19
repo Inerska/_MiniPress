@@ -47,7 +47,22 @@ return function (ContainerBuilder $containerBuilder) {
             });
 
             $finder = new FileViewFinder($filesystem, $paths);
-            return new Factory($resolver, $finder, new Dispatcher());
-        }
+            $events = new Dispatcher();
+
+            return new Factory($resolver, $finder, $events);
+        },
+
+        Illuminate\View\ViewFinderInterface::class => function (ContainerInterface $c) {
+            return $c->get('view')->getFinder();
+        },
+
+        Illuminate\Contracts\Events\Dispatcher::class => function (ContainerInterface $c) {
+            return $c->get('view')->getDispatcher();
+        },
+
+        Illuminate\View\Engines\EngineResolver::class => function (ContainerInterface $c) {
+            return $c->get('view')->getEngineResolver();
+        },
+
     ]);
 };

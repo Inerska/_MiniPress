@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Application\Actions\Article\CreateArticleAction;
 use App\Application\Actions\Article\GetArticleAction;
 use App\Application\Actions\Article\ListArticlesAction;
 use App\Application\Actions\Article\ListAuthorArticlesAction;
@@ -37,16 +38,7 @@ return function (App $app) {
      * Admin
      */
 
-    // routes.php
-    $app->get('/hello/{name}', function ($request, $response, $args) {
-        $name = $args['name'];
-
-        $view = $this->get('view')->make('hello', ['name' => $name])->render();
-
-        $response->getBody()->write($view);
-
-        return $response;
-    });
-
+    // Creation of an article
+    $app->get(ADMIN_PREFIX . '/articles', CreateArticleAction::class);
 
 };

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Application\Actions;
 
 use App\Domain\DomainException\DomainRecordNotFoundException;
+use Illuminate\View\Factory;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Log\LoggerInterface;
@@ -21,9 +22,12 @@ abstract class Action
 
     protected array $args;
 
-    public function __construct(LoggerInterface $logger)
+    protected Factory $view;
+
+    public function __construct(LoggerInterface $logger, Factory $view)
     {
         $this->logger = $logger;
+        $this->view = $view;
     }
 
     /**
@@ -87,4 +91,13 @@ abstract class Action
 
         return $this->response->withHeader('Content-Type', 'application/json')->withStatus($payload->getStatusCode());
     }
+
+    protected function respondWithView(string $template, array $data = []): Response
+    {
+        $view = $this->view->make($template, $data);
+        $this->response->getBody()->write($view->render());
+
+        return $this->response->withHeader('Content-Type', 'text/html');
+    }
+
 }
