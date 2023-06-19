@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Application\Actions\Article\CreateArticleAction;
+use App\Application\Actions\Article\Form\CreateArticleSubmitAction;
 use App\Application\Actions\Article\GetArticleAction;
 use App\Application\Actions\Article\ListArticlesAction;
 use App\Application\Actions\Article\ListAuthorArticlesAction;

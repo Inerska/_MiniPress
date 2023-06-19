@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
+namespace App\Application\Actions\Article\Form;
+
 use App\Application\Actions\Article\ArticleAction;
-use App\Domain\Article\Article;
 use Psr\Http\Message\ResponseInterface as Response;
 
 final class CreateArticleSubmitAction extends ArticleAction
@@ -12,22 +13,24 @@ final class CreateArticleSubmitAction extends ArticleAction
     {
         $formData = $this->getFormData();
 
-        if (empty($formData['title']) || empty($formData['content'])) {
+        if (empty($formData['title'])
+            || empty($formData['content'])
+            || empty($formData['summary'])) {
             return $this->respondWithData(['error' => 'Invalid form data'], 400);
         }
 
-        $article = new Article();
-        $article->title = $formData['title'];
-        $article->content = $formData['content'];
-        $article->summary = $formData['summary'] ?? '';
-        $article->user_id = $this->request->getAttribute('user')->id; // Supposez que l'utilisateur est connecté et accessible
-        $article->category_id = $formData['category_id'];
-        $article->save();
+        $this->repository->create([
+            'titre' => $formData['title'],
+            'resume' => $formData['summary'],
+            'contenu' => $formData['content'],
+            //TODO(alexis): SESSION
+            'auteur_id' => 1,
+        ]);
 
-        $this->logger->info('Article was created successfully: ' . $article->id);
+        $this->logger->info('Article was created successfully: ' . $formData['title']);
 
         return $this->response
-            ->withHeader('Location', '/articles/' . $article->id)
+            ->withHeader('Location', '/admin/articles/' . $formData['title'])
             ->withStatus(302);
     }
 }
