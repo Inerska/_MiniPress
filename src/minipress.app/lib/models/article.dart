@@ -18,17 +18,30 @@ class Article {
   });
 
   static Article fromJson(Map<String, dynamic> json) {
-    print(json);
+    print("get $json");
+
+    int id = 0;
+    if(json['url'] != null) {
+      try {
+        id = int.parse(json['url'].split('/').last);
+      } catch (e) {
+        id = 0;
+      }
+    }
 
     return Article(
-      id: json['id'] ?? 0,
-      title: json['title'],
-      creationDate: json['creation_date'].toString(),
-      author: json['auteur_id'].toString(),
-      summary: json['summary'],
-      content: json['content'],
+      id: json['id'] ?? id,
+      title: json['titre'] ?? '',
+      creationDate: json['date_creation'],
+      author: json['auteur_id']?.toString() ?? '',
+      summary: json['resume'],
+      content: json['contenu'],
     );
   }
+
+
+
+
 
   // Méthodes d'accès aux propriétés de l'article
   int get getId => id;
