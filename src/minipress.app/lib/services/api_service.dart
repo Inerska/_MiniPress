@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:todo_list_v1/models/article.dart';
 import 'package:todo_list_v1/models/category.dart';
@@ -6,18 +7,25 @@ import 'package:todo_list_v1/models/category.dart';
 class ApiService {
   // Méthode statique pour récupérer la liste des articles
   static Future<List<Article>> fetchArticles() async {
-    final response = await http.get(Uri.parse(
-        '/api/v1/articles')); // Appel à l'API pour récupérer les articles
+    final response = await http.get(Uri.http(
+        '127.0.0.1:8080', '/api/v1/articles')); // Appel à l'API pour récupérer les articles
 
-    if (response.statusCode == 200) {
-      // Si la requête a réussi
-      final jsonData = json.decode(response.body); // Décode la réponse JSON
+    final data = json.decode(response.body);
+
+    if (data['statusCode'] == 200) {
       final articlesData =
-          jsonData['data'] as List<dynamic>; // Obtient les données des articles
-      final articles = articlesData
-          .map((data) => Article.fromJson(data))
-          .toList(); // Convertit les données en une liste d'objets Article
-      return articles; // Retourne la liste des articles
+          data['data'] as List<dynamic>; // Obtient les données des articles
+
+      var articles = <Article>[];
+
+      for (var article in articlesData) {
+        articles.add(Article.fromJson(article));
+        print("Après ajout d'un article");
+      }
+
+      print("fin loop");
+
+      return articles.toList();
     } else {
       throw Exception(
           'Failed to fetch articles'); // Lance une exception si la requête a échoué

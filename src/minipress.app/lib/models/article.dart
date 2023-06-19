@@ -1,3 +1,5 @@
+import 'dart:io';
+
 class Article {
   final int id; // ID de l'article
   final String title; // Titre de l'article
@@ -7,7 +9,7 @@ class Article {
   final String? content; // Contenu de l'article (optionnel)
 
   Article({
-    required this.id,
+    this.id = 0,
     required this.title,
     required this.creationDate,
     required this.author,
@@ -15,12 +17,14 @@ class Article {
     this.content,
   });
 
-  factory Article.fromJson(Map<String, dynamic> json) {
+  static Article fromJson(Map<String, dynamic> json) {
+    print(json);
+
     return Article(
-      id: json['id'],
+      id: json['id'] ?? 0,
       title: json['title'],
-      creationDate: json['creation_date'],
-      author: json['author'],
+      creationDate: json['creation_date'].toString(),
+      author: json['auteur_id'].toString(),
       summary: json['summary'],
       content: json['content'],
     );
