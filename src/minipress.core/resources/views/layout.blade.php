@@ -23,7 +23,9 @@
             </svg>
             <h1 class="text-xl text-gray-700 font-bold">Admin</h1>
         </a>
-        @yield('navbar')
+        <ul class="font-semibold text-gray-700 mt-4 hover:text-gray-900 transition duration-150">
+            <li><a href="/admin/articles">Créer un article</a></li>
+        </ul>
     </section>
     <section class="pl-5 pt-2 w-4/5 flex items-center justify-center">
         @yield('content')
