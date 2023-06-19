@@ -11,6 +11,7 @@ use App\Application\Actions\Article\ListAuthorArticlesAction;
 use App\Application\Actions\Category\ListCategoriesAction;
 use App\Application\Actions\Category\ListCategoryArticlesAction;
 use Slim\App;
+use Slim\Routing\RouteCollectorProxy;
 
 return function (App $app) {
 
@@ -39,17 +40,17 @@ return function (App $app) {
     /**
      * Admin
      */
-    $app->group(ADMIN_PREFIX, function(App $app) {
+    $app->group(ADMIN_PREFIX, function (RouteCollectorProxy $routeCollectorProxy) {
         // Creation of an article
-        $app->get('/articles/create', CreateArticleAction::class);
+        $routeCollectorProxy->get('/articles/create', CreateArticleAction::class);
 
         // Handle the form submission
-        $app->post('/articles/create', CreateArticleSubmitAction::class);
+        $routeCollectorProxy->post('/articles/create', CreateArticleSubmitAction::class);
 
         // Display all articles
-        $app->get('/articles', DisplayArticlesAction::class);
+        $routeCollectorProxy->get('/articles', DisplayArticlesAction::class);
 
-    })->add(new AuthenticationMiddleware());
+    });
 
 
 };
