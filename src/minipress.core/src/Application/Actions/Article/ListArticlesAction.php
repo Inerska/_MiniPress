@@ -26,8 +26,8 @@ final class ListArticlesAction extends ArticleAction
 
         $articles = array_map(function ($article) {
             return [
-                'title' => $article['titre'],
-                'creation_date' => $article['date_creation'],
+                'titre' => $article['titre'],
+                'date_creation' => $article['date_creation'],
                 'auteur_id' => $article['auteur_id'],
                 'url' => "/articles/{$article['id']}",
             ];
