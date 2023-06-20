@@ -4,20 +4,20 @@ import 'package:todo_list_v1/screens/article_screen.dart';
 import 'package:todo_list_v1/services/api_service.dart';
 
 class CategoryArticlesScreen extends StatelessWidget {
-  final String category; // Catégorie d'articles à afficher
+  final int categoryId; // Catégorie d'articles à afficher
 
-  CategoryArticlesScreen({required this.category});
+  CategoryArticlesScreen({required this.categoryId});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-            'Articles - $category'), // Affiche le titre de la catégorie dans la barre de navigation
+            'Articles - $categoryId'), // Affiche le titre de la catégorie dans la barre de navigation
       ),
       body: FutureBuilder<List<Article>>(
         future: ApiService.fetchArticlesByCategory(
-            category), // Récupère la liste des articles par catégorie
+            categoryId), // Récupère la liste des articles par catégorie
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             // Si les données sont disponibles

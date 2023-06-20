@@ -4,20 +4,23 @@ import 'package:todo_list_v1/models/article.dart';
 import 'package:todo_list_v1/models/category.dart';
 
 class ApiService {
-  static Future<List<Article>> fetchArticlesByCategory(String category) async {
+  static Future<List<Article>> fetchArticlesByCategory(int categoryId) async {
     final response = await http.get(
-      Uri.http('127.0.0.1:8080', '/api/v1/categories/$category/articles'),
+      Uri.http('127.0.0.1:8080', '/api/v1/categories/$categoryId/articles'),
     );
 
     final data = json.decode(response.body);
 
     print(data);
 
-    if (data.statusCode == 200) {
+    if (data['statusCode'] == 200) {
       final articlesData = data['data'] as List<dynamic>;
       final articles = articlesData
           .map((articleData) => Article.fromJson(articleData))
           .toList();
+
+      print("Articles : $articles");
+
       return articles;
     } else {
       throw Exception('Failed to fetch articles by category');

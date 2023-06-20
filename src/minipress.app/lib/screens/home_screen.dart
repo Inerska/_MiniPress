@@ -47,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     context,
                     MaterialPageRoute(
                       builder: (context) => CategoryArticlesScreen(
-                        category: category.name,
+                        categoryId: category.id,
                       ),
                     ),
                   );
