@@ -54,9 +54,10 @@
   "statusCode": 200,
   "data": [
     {
-      "title": "Titre Article 2",
-      "creation_date": "2023-06-15 08:33:46",
-      "url": "TODO"
+      "titre": "Titre Article 3",
+      "date_creation": "2023-06-20 09:04:13",
+      "auteur_id": 2,
+      "url": "/articles/3"
     }
   ]
 }
