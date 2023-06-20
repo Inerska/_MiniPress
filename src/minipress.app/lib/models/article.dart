@@ -1,5 +1,3 @@
-import 'dart:io';
-
 class Article {
   final int id; // ID de l'article
   final String title; // Titre de l'article
@@ -21,7 +19,7 @@ class Article {
     print("get $json");
 
     int id = 0;
-    if(json['url'] != null) {
+    if (json['url'] != null) {
       try {
         id = int.parse(json['url'].split('/').last);
       } catch (e) {
@@ -38,10 +36,6 @@ class Article {
       content: json['contenu'],
     );
   }
-
-
-
-
 
   // Méthodes d'accès aux propriétés de l'article
   int get getId => id;
