@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Minipress Web</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module" src="App.js"></script>
+</head>
+<body>
+
+<div class="flex flex-col min-h-screen">
+    <!-- Navbar -->
+    <nav class="bg-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <a href="#" class="text-white text-xl font-semibold">Mon Site</a>
+                </div>
+                <div class="flex items-center">
+                    <div class="relative mr-4">
+                        <select id="categories" class="block appearance-none bg-gray-700 border border-gray-600 text-gray-300 px-4 py-2 rounded-md pr-8">
+                            <option>Toutes</option>
+                            <!-- Catégories -->
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-300">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path
+                                        d="M10 12l-6-6-1 1 7 7 7-7-1-1-6 6zm0 2l6-6 1 1-7 7-7-7-1-1 6 6zm0 2l-6-6-1 1 7 7 7-7-1-1-6 6z"
+                                ></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="relative mr-4">
+                        <select class="block appearance-none bg-gray-700 border border-gray-600 text-gray-300 px-4 py-2 rounded-md">
+                            <option>Trier croissant</option>
+                            <option>Trier décroissant</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-300">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path
+                                        d="M10 12l-6-6-1 1 7 7 7-7-1-1-6 6zm0 2l6-6 1 1-7 7-7-7-1-1 6 6zm0 2l-6-6-1 1 7 7 7-7-1-1-6 6z"
+                                ></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <input
+                            type="text"
+                            class="bg-gray-700 border border-gray-600 text-gray-300 px-4 py-2 rounded-md"
+                            placeholder="Filtrer"
+                    />
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Content -->
+    <div class="flex-1 bg-gray-200">
+        <div class="container mx-auto py-8">
+            <h2 class="text-2xl font-semibold mb-4">Liste des articles</h2>
+            <ul id="articles" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Articles -->
+            </ul>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
