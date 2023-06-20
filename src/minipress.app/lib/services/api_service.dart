@@ -1,14 +1,14 @@
 import 'dart:convert';
-import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:todo_list_v1/models/article.dart';
 import 'package:todo_list_v1/models/category.dart';
+import 'dart:core';
 
 class ApiService {
   // Méthode statique pour récupérer la liste des articles
   static Future<List<Article>> fetchArticles() async {
-    final response = await http.get(Uri.http(
-        '127.0.0.1:8080', '/api/v1/articles')); // Appel à l'API pour récupérer les articles
+    final response = await http.get(Uri.http('127.0.0.1:8080',
+        '/api/v1/articles')); // Appel à l'API pour récupérer les articles
 
     final data = json.decode(response.body);
 
@@ -22,6 +22,8 @@ class ApiService {
         articles.add(Article.fromJson(article));
       }
 
+      articles.sort((a, b) => b.creationDate.compareTo(a.creationDate));
+
       return articles.toList();
     } else {
       throw Exception(
@@ -31,8 +33,8 @@ class ApiService {
 
   // Méthode statique pour récupérer un article spécifique
   static Future<Article> fetchArticle(int articleId) async {
-    final response = await http.get(Uri.http(
-        '127.0.0.1:8080', '/api/v1/articles/$articleId')); // Appel à l'API pour récupérer l'article spécifié par son ID
+    final response = await http.get(Uri.http('127.0.0.1:8080',
+        '/api/v1/articles/$articleId')); // Appel à l'API pour récupérer l'article spécifié par son ID
 
     final data = json.decode(response.body);
 
@@ -48,7 +50,6 @@ class ApiService {
           'Failed to fetch article'); // Lance une exception si la requête a échoué
     }
   }
-
 
   // Méthode statique pour récupérer la liste des catégories
   static Future<List<Category>> fetchCategories() async {
