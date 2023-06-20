@@ -26,8 +26,15 @@
             </svg>
             <h1 class="text-xl text-gray-700 font-bold">Admin</h1>
         </a>
-        <ul class="font-semibold text-gray-700 mt-4 hover:text-gray-900 transition duration-150">
-            <li><a href="/admin/articles">Articles</a></li>
+        <ul class="font-semibold text-gray-700 mt-4 hover:text-gray-900 transition duration-150 h-full flex justify-between flex-col">
+            <div>
+                <li><a href="/admin/articles">Articles</a></li>
+            </div>
+            <div>
+                <li><a href="/login">Login</a></li>
+                <li><a href="/register">Register</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </div>
         </ul>
     </section>
     <section class="pl-5 pt-2 w-4/5 flex items-center justify-center">
