@@ -11,7 +11,7 @@ use Illuminate\View\Engines\CompilerEngine;
 use Illuminate\View\Engines\EngineResolver;
 use Illuminate\View\Factory;
 use Illuminate\View\FileViewFinder;
-use Minipress\Infrastructure\Persistence\Service\Identity\AuthenticationStateProviderService;
+use App\Infrastructure\Persistence\Service\Identity\AuthenticationStateProviderService;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Monolog\Processor\UidProcessor;

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Minipress\Application\Actions\Authentication;
+namespace App\Application\Actions\Authentication;
 
 use App\Application\Actions\Action;
 use Illuminate\View\Factory;
-use Minipress\Infrastructure\Persistence\Service\Identity\AuthenticationStateProviderService;
+use App\Infrastructure\Persistence\Service\Identity\AuthenticationStateProviderService;
 use Psr\Log\LoggerInterface;
 
 abstract class AuthenticationAction extends Action
@@ -17,9 +17,10 @@ abstract class AuthenticationAction extends Action
      * @param LoggerInterface $logger
      * @param Factory $view
      */
-    public function __construct(LoggerInterface $logger, Factory $view)
+    public function __construct(LoggerInterface $logger, Factory $view, AuthenticationStateProviderService $service)
     {
         parent::__construct($logger, $view);
-        $this->service = new AuthenticationStateProviderService();
+
+        $this->service = $service;
     }
 }

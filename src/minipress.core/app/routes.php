@@ -8,15 +8,10 @@ use App\Application\Actions\Article\Form\CreateArticleSubmitAction;
 use App\Application\Actions\Article\GetArticleAction;
 use App\Application\Actions\Article\ListArticlesAction;
 use App\Application\Actions\Article\ListAuthorArticlesAction;
-use App\Application\Actions\Auth\SigninAction;
-use App\Application\Actions\Auth\SigninSubmitAction;
-use App\Application\Actions\Auth\SignoutAction;
-use App\Application\Actions\Auth\SignupAction;
-use App\Application\Actions\Auth\SignupSubmitAction;
 use App\Application\Actions\Category\ListCategoriesAction;
 use App\Application\Actions\Category\ListCategoryArticlesAction;
 use App\Application\Actions\IndexAdminAction;
-use Minipress\Infrastructure\Persistence\Service\Identity\SignUpAuthenticationAction;
+use App\Application\Actions\Authentication\SignUpAuthenticationAction;
 use Slim\App;
 use Slim\Routing\RouteCollectorProxy;
 

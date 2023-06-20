@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Minipress\Infrastructure\Persistence\Service\Identity;
+namespace App\Infrastructure\Persistence\Service\Identity;
 
 interface AuthenticationStateProviderInterface
 {
