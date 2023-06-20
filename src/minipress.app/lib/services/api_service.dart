@@ -43,7 +43,6 @@ class ApiService {
       final articleData = data['data'];
       final article = Article.fromJson(
           articleData); // Convertit les données en un objet Article
-      print(article);
       return article; // Retourne l'article
     } else {
       throw Exception(
@@ -51,23 +50,21 @@ class ApiService {
     }
   }
 
-  // Méthode statique pour récupérer la liste des catégories
   static Future<List<Category>> fetchCategories() async {
-    final response = await http.get(Uri.parse(
-        '/api/v1/categories')); // Appel à l'API pour récupérer les catégories
+    final response =
+        await http.get(Uri.parse('http://127.0.0.1:8080/api/v1/categories'));
+
+    final data = json.decode(response.body);
+
+    print(data);
 
     if (response.statusCode == 200) {
-      // Si la requête a réussi
-      final jsonData = json.decode(response.body); // Décode la réponse JSON
-      final categoriesData = jsonData['data']
-          as List<dynamic>; // Obtient les données des catégories
-      final categories = categoriesData
-          .map((data) => Category.fromJson(data))
-          .toList(); // Convertit les données en une liste d'objets Category
-      return categories; // Retourne la liste des catégories
+      final categoriesData = data['data'] as List<dynamic>;
+      final categories =
+          categoriesData.map((data) => Category.fromJson(data)).toList();
+      return categories;
     } else {
-      throw Exception(
-          'Failed to fetch categories'); // Lance une exception si la requête a échoué
+      throw Exception('Failed to fetch categories');
     }
   }
 
