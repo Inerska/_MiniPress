@@ -16,6 +16,7 @@ use App\Application\Actions\Auth\SignupSubmitAction;
 use App\Application\Actions\Category\ListCategoriesAction;
 use App\Application\Actions\Category\ListCategoryArticlesAction;
 use App\Application\Actions\IndexAdminAction;
+use Minipress\Infrastructure\Persistence\Service\Identity\SignUpAuthenticationAction;
 use Slim\App;
 use Slim\Routing\RouteCollectorProxy;
 
@@ -72,7 +73,7 @@ return function (App $app) {
             $authenticationRouteCollectorProxy->get('/signout', SignoutAction::class);
 
             // Signup
-            $authenticationRouteCollectorProxy->get('/signup', SignupAction::class);
+            $authenticationRouteCollectorProxy->get('/signup', SignUpAuthenticationAction::class);
 
             // Handle the form submission
             $authenticationRouteCollectorProxy->post('/signup', SignupSubmitAction::class);
