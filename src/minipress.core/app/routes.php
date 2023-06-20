@@ -8,6 +8,11 @@ use App\Application\Actions\Article\Form\CreateArticleSubmitAction;
 use App\Application\Actions\Article\GetArticleAction;
 use App\Application\Actions\Article\ListArticlesAction;
 use App\Application\Actions\Article\ListAuthorArticlesAction;
+use App\Application\Actions\Auth\SigninAction;
+use App\Application\Actions\Auth\SigninSubmitAction;
+use App\Application\Actions\Auth\SignoutAction;
+use App\Application\Actions\Auth\SignupAction;
+use App\Application\Actions\Auth\SignupSubmitAction;
 use App\Application\Actions\Category\ListCategoriesAction;
 use App\Application\Actions\Category\ListCategoryArticlesAction;
 use App\Application\Actions\IndexAdminAction;
@@ -18,6 +23,7 @@ return function (App $app) {
 
     define('API_PREFIX', '/api/v1');
     define('ADMIN_PREFIX', '/admin');
+    define('ADMIN_AUTH_PREFIX', '/auth');
 
     /**
      * API
@@ -54,6 +60,23 @@ return function (App $app) {
         // Display all articles
         $routeCollectorProxy->get('/articles', DisplayArticlesAction::class);
 
+        // Authentication
+        $routeCollectorProxy->group('/auth', function (RouteCollectorProxy $authenticationRouteCollectorProxy) {
+            // Signin
+            $authenticationRouteCollectorProxy->get('/signin', SigninAction::class);
+
+            // Handle the form submission
+            $authenticationRouteCollectorProxy->post('/signin', SigninSubmitAction::class);
+
+            // Signout
+            $authenticationRouteCollectorProxy->get('/signout', SignoutAction::class);
+
+            // Signup
+            $authenticationRouteCollectorProxy->get('/signup', SignupAction::class);
+
+            // Handle the form submission
+            $authenticationRouteCollectorProxy->post('/signup', SignupSubmitAction::class);
+        });
     });
 
 
