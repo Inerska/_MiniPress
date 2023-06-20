@@ -1,5 +1,3 @@
-import 'dart:io';
-
 class Article {
   final int id; // ID de l'article
   final String title; // Titre de l'article
@@ -21,7 +19,9 @@ class Article {
     print("get $json");
 
     int id = 0;
-    if(json['url'] != null) {
+    if (json['id'] != null) {
+      id = json['id'];
+    } else if (json['url'] != null) {
       try {
         id = int.parse(json['url'].split('/').last);
       } catch (e) {
@@ -30,7 +30,7 @@ class Article {
     }
 
     return Article(
-      id: json['id'] ?? id,
+      id: id,
       title: json['titre'] ?? '',
       creationDate: json['date_creation'],
       author: json['auteur_id']?.toString() ?? '',
@@ -38,16 +38,4 @@ class Article {
       content: json['contenu'],
     );
   }
-
-
-
-
-
-  // Méthodes d'accès aux propriétés de l'article
-  int get getId => id;
-  String get getTitle => title;
-  String get getCreationDate => creationDate;
-  String get getAuthor => author;
-  String? get getSummary => summary;
-  String? get getContent => content;
 }
