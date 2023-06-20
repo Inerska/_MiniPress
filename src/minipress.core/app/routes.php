@@ -10,6 +10,7 @@ use App\Application\Actions\Article\ListArticlesAction;
 use App\Application\Actions\Article\ListAuthorArticlesAction;
 use App\Application\Actions\Category\ListCategoriesAction;
 use App\Application\Actions\Category\ListCategoryArticlesAction;
+use App\Application\Actions\IndexAdminAction;
 use Slim\App;
 use Slim\Routing\RouteCollectorProxy;
 
@@ -41,6 +42,9 @@ return function (App $app) {
      * Admin
      */
     $app->group(ADMIN_PREFIX, function (RouteCollectorProxy $routeCollectorProxy) {
+        // Index
+        $routeCollectorProxy->get('[/]', IndexAdminAction::class);
+
         // Creation of an article
         $routeCollectorProxy->get('/articles/create', CreateArticleAction::class);
 
