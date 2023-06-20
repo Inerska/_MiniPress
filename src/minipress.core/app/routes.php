@@ -8,11 +8,13 @@ use App\Application\Actions\Article\Form\CreateArticleSubmitAction;
 use App\Application\Actions\Article\GetArticleAction;
 use App\Application\Actions\Article\ListArticlesAction;
 use App\Application\Actions\Article\ListAuthorArticlesAction;
+use App\Application\Actions\Authentication\SignInAuthenticationAction;
 use App\Application\Actions\Authentication\SignUpAuthenticationSubmitAction;
 use App\Application\Actions\Category\ListCategoriesAction;
 use App\Application\Actions\Category\ListCategoryArticlesAction;
 use App\Application\Actions\IndexAdminAction;
 use App\Application\Actions\Authentication\SignUpAuthenticationAction;
+use App\Application\Middleware\AuthenticationMiddleware;
 use Slim\App;
 use Slim\Routing\RouteCollectorProxy;
 
@@ -49,7 +51,8 @@ return function (App $app) {
         $routeCollectorProxy->get('[/]', IndexAdminAction::class);
 
         // Creation of an article
-        $routeCollectorProxy->get('/articles/create', CreateArticleAction::class);
+        $routeCollectorProxy->get('/articles/create', CreateArticleAction::class)
+            ->addMiddleware(new AuthenticationMiddleware());
 
         // Handle the form submission
         $routeCollectorProxy->post('/articles/create', CreateArticleSubmitAction::class);
