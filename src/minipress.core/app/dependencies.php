@@ -11,6 +11,7 @@ use Illuminate\View\Engines\CompilerEngine;
 use Illuminate\View\Engines\EngineResolver;
 use Illuminate\View\Factory;
 use Illuminate\View\FileViewFinder;
+use Minipress\Infrastructure\Persistence\Service\Identity\AuthenticationStateProviderService;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Monolog\Processor\UidProcessor;
@@ -62,6 +63,10 @@ return function (ContainerBuilder $containerBuilder) {
 
         Illuminate\View\Engines\EngineResolver::class => function (ContainerInterface $c) {
             return $c->get('view')->getEngineResolver();
+        },
+
+        AuthenticationStateProviderService::class => function (ContainerInterface $c) {
+            return AuthenticationStateProviderService::getInstance();
         },
 
     ]);

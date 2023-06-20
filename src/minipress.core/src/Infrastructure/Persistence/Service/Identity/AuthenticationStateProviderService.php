@@ -8,6 +8,21 @@ use App\Domain\User\User;
 
 final class AuthenticationStateProviderService implements AuthenticationStateProviderInterface
 {
+    private static ?AuthenticationStateProviderService $instance = null;
+
+    private function __construct()
+    {
+    }
+
+    public static function getInstance(): AuthenticationStateProviderService
+    {
+        if (self::$instance === null) {
+            self::$instance = new AuthenticationStateProviderService();
+        }
+
+        return self::$instance;
+    }
+
     public function user()
     {
         if (isset($_SESSION['user_id'])) {
