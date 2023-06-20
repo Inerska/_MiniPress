@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Model
 {
-    protected $table = 'auteurs';
+    protected $table = 'auteur';
 
     protected $fillable = ['name', 'email', 'password'];
 
