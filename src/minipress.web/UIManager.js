@@ -15,7 +15,6 @@ export class UIManager {
     }
 
     renderArticles(articles) {
-        console.log(articles)
         const articlesList = document.querySelector("#articles");
         articlesList.innerHTML = "";
 
