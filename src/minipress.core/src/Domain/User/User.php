@@ -12,7 +12,9 @@ class User extends Model
 {
     protected $table = 'auteur';
 
-    protected $fillable = ['name', 'email', 'password'];
+    protected $fillable = ['nom', 'email', 'mot_de_passe'];
+
+    public $timestamps = false;
 
     public function articles(): HasMany
     {

@@ -8,6 +8,7 @@ use App\Application\Actions\Article\Form\CreateArticleSubmitAction;
 use App\Application\Actions\Article\GetArticleAction;
 use App\Application\Actions\Article\ListArticlesAction;
 use App\Application\Actions\Article\ListAuthorArticlesAction;
+use App\Application\Actions\Authentication\SignUpAuthenticationSubmitAction;
 use App\Application\Actions\Category\ListCategoriesAction;
 use App\Application\Actions\Category\ListCategoryArticlesAction;
 use App\Application\Actions\IndexAdminAction;
@@ -71,7 +72,7 @@ return function (App $app) {
             $authenticationRouteCollectorProxy->get('/signup', SignUpAuthenticationAction::class);
 
             // Handle the form submission
-            $authenticationRouteCollectorProxy->post('/signup', SignupSubmitAction::class);
+            $authenticationRouteCollectorProxy->post('/signup', SignUpAuthenticationSubmitAction::class);
         });
     });
 
