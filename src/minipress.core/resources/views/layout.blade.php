@@ -31,9 +31,9 @@
                 <li><a href="/admin/articles">Articles</a></li>
             </div>
             <div>
-                <li><a href="/login">Login</a></li>
-                <li><a href="/register">Register</a></li>
-                <li><a href="/logout">Logout</a></li>
+                <li><a href="/admin/auth/signin">Login</a></li>
+                <li><a href="/admin/auth/signup">Register</a></li>
+                <li><a href="/admin/auth/signout">Logout</a></li>
             </div>
         </ul>
     </section>
