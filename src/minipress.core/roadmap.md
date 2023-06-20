@@ -9,8 +9,8 @@
 - [ ] **2. Association d'un article à une catégorie**
     - [ ] 2.1 Ajout d'une liste déroulante des catégories existantes sur le formulaire de création d'article
 
-- [ ] **3. Affichage de la liste des articles**
-    - [ ] 3.1 Création de la page pour afficher la liste des articles
+- [x] **3. Affichage de la liste des articles**
+    - [x] 3.1 Création de la page pour afficher la liste des articles
 
 - [ ] **4. Filtrage de la liste des articles par catégorie**
     - [ ] 4.1 Ajout d'un filtre de catégorie sur la page de liste des articles
