@@ -60,10 +60,10 @@ return function (App $app) {
         // Authentication
         $routeCollectorProxy->group('/auth', function (RouteCollectorProxy $authenticationRouteCollectorProxy) {
             // Signin
-            $authenticationRouteCollectorProxy->get('/signin', SigninAction::class);
+            $authenticationRouteCollectorProxy->get('/signin', SignInAuthenticationAction::class);
 
             // Handle the form submission
-            $authenticationRouteCollectorProxy->post('/signin', SigninSubmitAction::class);
+            $authenticationRouteCollectorProxy->post('/signin', SignInAuthenticationSubmitAction::class);
 
             // Signout
             $authenticationRouteCollectorProxy->get('/signout', SignoutAction::class);
