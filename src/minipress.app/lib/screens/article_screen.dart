@@ -6,8 +6,9 @@ import 'package:todo_list_v1/services/api_service.dart';
 
 class ArticleScreen extends StatelessWidget {
   final int articleId; // ID de l'article à afficher
+  final String articleTitle; // Titre de l'article
 
-  ArticleScreen({required this.articleId});
+  ArticleScreen({required this.articleId, required this.articleTitle});
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +21,8 @@ class ArticleScreen extends StatelessWidget {
           final article = snapshot.data!; // Obtient l'instance de l'article
           return Scaffold(
             appBar: AppBar(
-              title: Text(article
-                  .title), // Affiche le titre de l'article dans la barre de navigation
+              title: Text(
+                  articleTitle), // Affiche le titre de l'article dans la barre de navigation
             ),
             body: SingleChildScrollView(
               padding: EdgeInsets.all(16.0),
@@ -59,11 +60,11 @@ class ArticleScreen extends StatelessWidget {
                   if (article.content !=
                       null) // Vérifie si un contenu est disponible
                     Container(
+                      margin: EdgeInsets.only(top: 8.0),
                       child: Html(
                         data: article
                             .content!, // Affiche le contenu de l'article en utilisant le widget Html pour interpréter le HTML
                       ),
-                      margin: EdgeInsets.only(top: 8.0),
                     ),
                 ],
               ),
@@ -75,6 +76,7 @@ class ArticleScreen extends StatelessWidget {
               child: Text(
                   'Error: ${snapshot.error}')); // Affiche un message d'erreur
         }
+
         return Center(
             child:
                 CircularProgressIndicator()); // Affiche un indicateur de chargement en attendant les données

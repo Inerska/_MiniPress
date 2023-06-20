@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:todo_list_v1/models/category.dart';
+import 'package:todo_list_v1/screens/category_articles_screen.dart';
 import 'package:todo_list_v1/services/api_service.dart';
+import 'package:todo_list_v1/models/category.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -8,49 +9,53 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late Future<List<Category>> _categories;
+  List<Category> categories = [];
 
   @override
   void initState() {
     super.initState();
-    _categories = ApiService.fetchCategories();
+    fetchCategories();
+  }
+
+  Future<void> fetchCategories() async {
+    try {
+      final fetchedCategories = await ApiService.fetchCategories();
+      setState(() {
+        categories = fetchedCategories;
+      });
+    } catch (error) {
+      print('Failed to fetch categories: $error');
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('MiniPress'),
+        title: Text('Accueil : Liste des articles'),
       ),
-      body: FutureBuilder<List<Category>>(
-        future: _categories,
-        builder: (context, AsyncSnapshot<List<Category>> snapshot) {
-          if (snapshot.hasData) {
-            List<Category>? categories = snapshot.data;
-            if (categories != null) {
-              return ListView.builder(
-                itemCount: categories.length,
-                itemBuilder: (context, index) {
-                  Category category = categories[index];
-                  return ListTile(
-                    title: Text(category.name),
+      body: Center(
+        child: ListView.builder(
+          itemCount: categories.length,
+          itemBuilder: (context, index) {
+            final category = categories[index];
+            return Card(
+              child: ListTile(
+                title: Text(category.name),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CategoryArticlesScreen(
+                        category: category.name,
+                      ),
+                    ),
                   );
                 },
-              );
-            } else {
-              return Center(
-                child: Text('Categories data is null'),
-              );
-            }
-          } else if (snapshot.hasError) {
-            return Center(
-              child: Text('Failed to fetch categories'),
+              ),
             );
-          }
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        },
+          },
+        ),
       ),
     );
   }
