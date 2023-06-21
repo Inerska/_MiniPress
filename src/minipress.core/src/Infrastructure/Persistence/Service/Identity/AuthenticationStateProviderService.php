@@ -53,4 +53,13 @@ final class AuthenticationStateProviderService implements AuthenticationStatePro
     {
         unset($_SESSION['user_id']);
     }
+
+    public function debugString(): string
+    {
+        $stringBuilder = "AuthenticationStateProviderService: \n";
+        $stringBuilder .= "user_id: " . $_SESSION['user_id'] . "\n";
+        $stringBuilder .= "user: " . $this->user() . "\n";
+        $stringBuilder .= "check: " . $this->check() . "\n";
+        return $stringBuilder;
+    }
 }

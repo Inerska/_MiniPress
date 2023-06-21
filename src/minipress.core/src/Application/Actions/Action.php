@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Application\Actions;
 
 use App\Domain\DomainException\DomainRecordNotFoundException;
+use App\Infrastructure\Persistence\Service\Identity\AuthenticationStateProviderService;
 use Illuminate\View\Factory;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -28,6 +29,8 @@ abstract class Action
     {
         $this->logger = $logger;
         $this->view = $view;
+
+        $this->view->share('authService', AuthenticationStateProviderService::getInstance());
     }
 
     /**

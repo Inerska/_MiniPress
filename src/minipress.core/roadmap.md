@@ -18,8 +18,8 @@
 - [ ] **5. Création de catégories**
     - [ ] 5.1 Création de la page de formulaire pour la création de catégories
 
-- [ ] **6. Authentification des utilisateurs**
-    - [ ] 6.1 Création du formulaire d'authentification
+- [x] **6. Authentification des utilisateurs**
+    - [x] 6.1 Création du formulaire d'authentification
 
 - [ ] **7. Contrôle d'accès pour la création d'articles**
     - [ ] 7.1 Mise en place de contrôles d'accès pour s'assurer que seuls les utilisateurs authentifiés peuvent créer des articles

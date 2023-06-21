@@ -30,10 +30,14 @@
             <div>
                 <li><a href="/admin/articles">Articles</a></li>
             </div>
+
             <div>
-                <li><a href="/admin/auth/signin">Login</a></li>
-                <li><a href="/admin/auth/signup">Register</a></li>
-                <li><a href="/admin/auth/signout">Logout</a></li>
+                @if($authService->check())
+                    <li><a href="/admin/auth/signout">Logout</a></li>
+                @else
+                    <li><a href="/admin/auth/signin">Login</a></li>
+                    <li><a href="/admin/auth/signup">Register</a></li>
+                @endif
             </div>
         </ul>
     </section>
