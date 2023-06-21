@@ -32,9 +32,9 @@
                 <li class="hover:bg-gray-700 hover:text-white transition duration-150 ease-in-out"><a href="/admin/categories">Catégories</a></li>
             </div>
 
-            <div>
+            <div class="mb-10 text-center">
                 @if($authService->check())
-                    <li><a href="/admin/auth/signout">Logout</a></li>
+                    <li><a href="/admin/auth/signout" class="mb-10 bg-red-500 text-white rounded p-2">Logout</a></li>
                 @else
                     <li><a href="/admin/auth/signin">Login</a></li>
                     <li><a href="/admin/auth/signup">Register</a></li>
