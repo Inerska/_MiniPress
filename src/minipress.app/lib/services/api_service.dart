@@ -6,6 +6,25 @@ import 'package:todo_list_v1/models/category.dart';
 class ApiService {
   static const String baseUrl = 'http://127.0.0.1:8080/api/v1';
 
+  static Future<List<Article>> fetchAllArticles() async {
+    final response = await http.get(
+      Uri.parse('$baseUrl/articles'),
+    );
+
+    final data = json.decode(response.body);
+
+    if (response.statusCode == 200) {
+      final articlesData = data['data'] as List<dynamic>;
+      final articles = articlesData
+          .map((articleData) => Article.fromJson(articleData))
+          .toList();
+
+      return articles;
+    } else {
+      throw Exception('Failed to fetch all articles');
+    }
+  }
+
   static Future<List<Article>> fetchArticlesByCategory(int categoryId) async {
     final response = await http.get(
       Uri.parse('$baseUrl/categories/$categoryId/articles'),

@@ -4,7 +4,7 @@ import 'package:todo_list_v1/screens/article_screen.dart';
 import 'package:todo_list_v1/services/api_service.dart';
 
 class CategoryArticlesScreen extends StatelessWidget {
-  final int categoryId; // Catégorie d'articles à afficher
+  final int categoryId;
 
   CategoryArticlesScreen({required this.categoryId});
 
