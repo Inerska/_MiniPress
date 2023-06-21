@@ -13,7 +13,9 @@ use App\Application\Actions\Authentication\Form\SignUpAuthenticationSubmitAction
 use App\Application\Actions\Authentication\SignInAuthenticationAction;
 use App\Application\Actions\Authentication\SignOutAuthenticationAction;
 use App\Application\Actions\Authentication\SignUpAuthenticationAction;
+use App\Application\Actions\Category\CreateCategorieAction;
 use App\Application\Actions\Category\DisplayCategoriesAction;
+use App\Application\Actions\Category\Form\CreateCategorySubmitAction;
 use App\Application\Actions\Category\ListCategoriesAction;
 use App\Application\Actions\Category\ListCategoryArticlesAction;
 use App\Application\Actions\IndexAdminAction;
@@ -63,8 +65,14 @@ return function (App $app) {
         // Display all articles
         $routeCollectorProxy->get('/articles', DisplayArticlesAction::class);
 
-        // DIsplay all categories
+        // Display all categories
         $routeCollectorProxy->get('/categories', DisplayCategoriesAction::class);
+
+        // Create a category
+        $routeCollectorProxy->get('/categories/create', CreateCategorieAction::class);
+
+        // handle the form submission
+        $routeCollectorProxy->post('/categories/create', CreateCategorySubmitAction::class);
 
         // Authentication
         $routeCollectorProxy->group('/auth', function (RouteCollectorProxy $authenticationRouteCollectorProxy) {

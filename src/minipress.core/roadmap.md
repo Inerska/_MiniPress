@@ -15,8 +15,8 @@
 - [ ] **4. Filtrage de la liste des articles par catégorie**
     - [ ] 4.1 Ajout d'un filtre de catégorie sur la page de liste des articles
 
-- [ ] **5. Création de catégories**
-    - [ ] 5.1 Création de la page de formulaire pour la création de catégories
+- [x] **5. Création de catégories**
+    - [x] 5.1 Création de la page de formulaire pour la création de catégories
 
 - [x] **6. Authentification des utilisateurs**
     - [x] 6.1 Création du formulaire d'authentification
