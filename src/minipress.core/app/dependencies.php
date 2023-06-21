@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Application\Settings\SettingsInterface;
+use App\Infrastructure\Persistence\Service\Identity\AuthenticationStateProviderService;
 use DI\ContainerBuilder;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Filesystem\Filesystem;
@@ -46,10 +47,15 @@ return function (ContainerBuilder $containerBuilder) {
                 return new CompilerEngine($compiler);
             });
 
+
             $finder = new FileViewFinder($filesystem, $paths);
             $events = new Dispatcher();
 
-            return new Factory($resolver, $finder, $events);
+            $view = new Factory($resolver, $finder, $events);
+            $authenticationServiceProvider = AuthenticationStateProviderService::getInstance();
+            $view->share('authService', $authenticationServiceProvider);
+
+            return $view;
         },
 
         Illuminate\View\ViewFinderInterface::class => function (ContainerInterface $c) {
@@ -62,6 +68,10 @@ return function (ContainerBuilder $containerBuilder) {
 
         Illuminate\View\Engines\EngineResolver::class => function (ContainerInterface $c) {
             return $c->get('view')->getEngineResolver();
+        },
+
+        AuthenticationStateProviderService::class => function (ContainerInterface $c) {
+            return AuthenticationStateProviderService::getInstance();
         },
 
     ]);

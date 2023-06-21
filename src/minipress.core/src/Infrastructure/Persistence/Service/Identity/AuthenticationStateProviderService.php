@@ -2,12 +2,27 @@
 
 declare(strict_types=1);
 
-namespace Minipress\Infrastructure\Persistence\Service\Identity;
+namespace App\Infrastructure\Persistence\Service\Identity;
 
 use App\Domain\User\User;
 
 final class AuthenticationStateProviderService implements AuthenticationStateProviderInterface
 {
+    private static ?AuthenticationStateProviderService $instance = null;
+
+    private function __construct()
+    {
+    }
+
+    public static function getInstance(): AuthenticationStateProviderService
+    {
+        if (self::$instance === null) {
+            self::$instance = new AuthenticationStateProviderService();
+        }
+
+        return self::$instance;
+    }
+
     public function user()
     {
         if (isset($_SESSION['user_id'])) {
@@ -26,7 +41,7 @@ final class AuthenticationStateProviderService implements AuthenticationStatePro
     {
         $user = User::where('email', $email)->first();
 
-        if ($user && password_verify($password, $user->password)) {
+        if ($user && password_verify($password, $user->mot_de_passe)) {
             $_SESSION['user_id'] = $user->id;
             return true;
         }
@@ -37,5 +52,14 @@ final class AuthenticationStateProviderService implements AuthenticationStatePro
     public function logout()
     {
         unset($_SESSION['user_id']);
+    }
+
+    public function debugString(): string
+    {
+        $stringBuilder = "AuthenticationStateProviderService: \n";
+        $stringBuilder .= "user_id: " . $_SESSION['user_id'] . "\n";
+        $stringBuilder .= "user: " . $this->user() . "\n";
+        $stringBuilder .= "check: " . $this->check() . "\n";
+        return $stringBuilder;
     }
 }

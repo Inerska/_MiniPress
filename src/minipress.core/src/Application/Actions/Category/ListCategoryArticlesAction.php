@@ -15,9 +15,10 @@ final class ListCategoryArticlesAction extends CategoryAction
 
         $articles = array_map(function ($article) {
             return [
-                'title' => $article['titre'],
-                'creation_date' => $article['date_creation'],
-                'url' => 'TODO'
+                'titre' => $article['titre'],
+                'date_creation' => $article['date_creation'],
+                'auteur_id' => $article['auteur_id'],
+                'url' => '/articles/' . $article['id'],
             ];
         }, $articles);
 

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Application\Actions\Article\Form;
 
 use App\Application\Actions\Article\ArticleAction;
+use App\Infrastructure\Persistence\Service\Identity\AuthenticationStateProviderService;
 use Psr\Http\Message\ResponseInterface as Response;
 
 final class CreateArticleSubmitAction extends ArticleAction
@@ -23,8 +24,7 @@ final class CreateArticleSubmitAction extends ArticleAction
             'titre' => $formData['title'],
             'resume' => $formData['summary'],
             'contenu' => $formData['content'],
-            //TODO(alexis): SESSION
-            'auteur_id' => 1,
+            'auteur_id' => AuthenticationStateProviderService::getInstance()->user()->id()
         ]);
 
         $this->logger->info('Article was created successfully: ' . $formData['title']);

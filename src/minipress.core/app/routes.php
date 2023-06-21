@@ -8,15 +8,16 @@ use App\Application\Actions\Article\Form\CreateArticleSubmitAction;
 use App\Application\Actions\Article\GetArticleAction;
 use App\Application\Actions\Article\ListArticlesAction;
 use App\Application\Actions\Article\ListAuthorArticlesAction;
-use App\Application\Actions\Auth\SigninAction;
-use App\Application\Actions\Auth\SigninSubmitAction;
-use App\Application\Actions\Auth\SignoutAction;
-use App\Application\Actions\Auth\SignupAction;
-use App\Application\Actions\Auth\SignupSubmitAction;
+use App\Application\Actions\Authentication\Form\SignInAuthenticationSubmitAction;
+use App\Application\Actions\Authentication\Form\SignUpAuthenticationSubmitAction;
+use App\Application\Actions\Authentication\SignInAuthenticationAction;
+use App\Application\Actions\Authentication\SignOutAuthenticationAction;
+use App\Application\Actions\Authentication\SignUpAuthenticationAction;
+use App\Application\Actions\Category\DisplayCategoriesAction;
 use App\Application\Actions\Category\ListCategoriesAction;
 use App\Application\Actions\Category\ListCategoryArticlesAction;
 use App\Application\Actions\IndexAdminAction;
-use Minipress\Infrastructure\Persistence\Service\Identity\SignUpAuthenticationAction;
+use App\Application\Middleware\AuthenticationMiddleware;
 use Slim\App;
 use Slim\Routing\RouteCollectorProxy;
 
@@ -53,7 +54,8 @@ return function (App $app) {
         $routeCollectorProxy->get('[/]', IndexAdminAction::class);
 
         // Creation of an article
-        $routeCollectorProxy->get('/articles/create', CreateArticleAction::class);
+        $routeCollectorProxy->get('/articles/create', CreateArticleAction::class)
+            ->addMiddleware(new AuthenticationMiddleware());
 
         // Handle the form submission
         $routeCollectorProxy->post('/articles/create', CreateArticleSubmitAction::class);
@@ -61,22 +63,25 @@ return function (App $app) {
         // Display all articles
         $routeCollectorProxy->get('/articles', DisplayArticlesAction::class);
 
+        // DIsplay all categories
+        $routeCollectorProxy->get('/categories', DisplayCategoriesAction::class);
+
         // Authentication
         $routeCollectorProxy->group('/auth', function (RouteCollectorProxy $authenticationRouteCollectorProxy) {
             // Signin
-            $authenticationRouteCollectorProxy->get('/signin', SigninAction::class);
+            $authenticationRouteCollectorProxy->get('/signin', SignInAuthenticationAction::class);
 
             // Handle the form submission
-            $authenticationRouteCollectorProxy->post('/signin', SigninSubmitAction::class);
+            $authenticationRouteCollectorProxy->post('/signin', SignInAuthenticationSubmitAction::class);
 
             // Signout
-            $authenticationRouteCollectorProxy->get('/signout', SignoutAction::class);
+            $authenticationRouteCollectorProxy->get('/signout', SignOutAuthenticationAction::class);
 
             // Signup
             $authenticationRouteCollectorProxy->get('/signup', SignUpAuthenticationAction::class);
 
             // Handle the form submission
-            $authenticationRouteCollectorProxy->post('/signup', SignupSubmitAction::class);
+            $authenticationRouteCollectorProxy->post('/signup', SignUpAuthenticationSubmitAction::class);
         });
     });
 

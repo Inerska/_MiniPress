@@ -29,11 +29,16 @@
         <ul class="font-semibold text-gray-700 mt-4 hover:text-gray-900 transition duration-150 h-full flex justify-between flex-col">
             <div>
                 <li><a href="/admin/articles">Articles</a></li>
+                <li><a href="/admin/categories">Catégories</a></li>
             </div>
+
             <div>
-                <li><a href="/admin/auth/signin">Login</a></li>
-                <li><a href="/admin/auth/signup">Register</a></li>
-                <li><a href="/admin/auth/signout">Logout</a></li>
+                @if($authService->check())
+                    <li><a href="/admin/auth/signout">Logout</a></li>
+                @else
+                    <li><a href="/admin/auth/signin">Login</a></li>
+                    <li><a href="/admin/auth/signup">Register</a></li>
+                @endif
             </div>
         </ul>
     </section>
