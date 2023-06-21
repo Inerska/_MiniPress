@@ -45,10 +45,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<void> fetchArticlesByCategory(int categoryId) async {
     try {
-      final fetchedArticles = await ApiService.fetchArticle(categoryId);
+      final fetchedArticles =
+          await ApiService.fetchArticlesByCategory(categoryId);
 
       setState(() {
-        articles = [fetchedArticles];
+        articles = fetchedArticles;
       });
     } catch (error) {
       print('Failed to fetch articles by category: $error');
