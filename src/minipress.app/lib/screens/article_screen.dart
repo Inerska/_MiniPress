@@ -24,7 +24,7 @@ class ArticleScreen extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 24.0,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black, // Ajout de la couleur noire
+                  color: Colors.black,
                 ),
               ),
               backgroundColor: Colors.deepPurple,
@@ -51,7 +51,8 @@ class ArticleScreen extends StatelessWidget {
                     child: RichText(
                       text: TextSpan(
                         text: utils.DateUtils.formatDateTime(
-                            article.creationDate),
+                          article.creationDate,
+                        ),
                         style: TextStyle(
                           color: Colors.red,
                           fontSize: 18.0,
@@ -66,10 +67,19 @@ class ArticleScreen extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 24.0,
                       fontWeight: FontWeight.bold,
-                      color: Colors.black, // Ajout de la couleur noire
+                      color: Colors.black,
                     ),
                   ),
-                  SizedBox(height: 24.0),
+                  SizedBox(height: 16.0),
+                  Text(
+                    'Réalisé par auteur numéro ${article.author}',
+                    style: TextStyle(
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.orange,
+                    ),
+                  ),
+                  SizedBox(height: 16.0),
                   if (article.summary != null)
                     Container(
                       padding: EdgeInsets.all(16.0),
@@ -85,7 +95,7 @@ class ArticleScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                  SizedBox(height: 24.0),
+                  SizedBox(height: 16.0),
                   if (article.content != null)
                     Container(
                       margin: EdgeInsets.only(top: 8.0),
