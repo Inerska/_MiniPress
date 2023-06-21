@@ -8,12 +8,14 @@ use App\Application\Actions\Article\Form\CreateArticleSubmitAction;
 use App\Application\Actions\Article\GetArticleAction;
 use App\Application\Actions\Article\ListArticlesAction;
 use App\Application\Actions\Article\ListAuthorArticlesAction;
+use App\Application\Actions\Authentication\Form\SignInAuthenticationSubmitAction;
+use App\Application\Actions\Authentication\Form\SignOutAuthenticationAction;
+use App\Application\Actions\Authentication\Form\SignUpAuthenticationSubmitAction;
 use App\Application\Actions\Authentication\SignInAuthenticationAction;
-use App\Application\Actions\Authentication\SignUpAuthenticationSubmitAction;
+use App\Application\Actions\Authentication\SignUpAuthenticationAction;
 use App\Application\Actions\Category\ListCategoriesAction;
 use App\Application\Actions\Category\ListCategoryArticlesAction;
 use App\Application\Actions\IndexAdminAction;
-use App\Application\Actions\Authentication\SignUpAuthenticationAction;
 use App\Application\Middleware\AuthenticationMiddleware;
 use Slim\App;
 use Slim\Routing\RouteCollectorProxy;
@@ -69,7 +71,7 @@ return function (App $app) {
             $authenticationRouteCollectorProxy->post('/signin', SignInAuthenticationSubmitAction::class);
 
             // Signout
-            $authenticationRouteCollectorProxy->get('/signout', SignoutAction::class);
+            $authenticationRouteCollectorProxy->get('/signout', SignOutAuthenticationAction::class);
 
             // Signup
             $authenticationRouteCollectorProxy->get('/signup', SignUpAuthenticationAction::class);
