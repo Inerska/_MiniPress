@@ -13,6 +13,9 @@ class _HomeScreenState extends State<HomeScreen> {
   Category? selectedCategory;
   List<Category> categories = [];
   List<Article> articles = [];
+  List<Article> filteredArticles = [];
+  bool isAscending = true;
+  String searchKeyword = '';
 
   @override
   void initState() {
@@ -45,14 +48,46 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<void> fetchArticlesByCategory(int categoryId) async {
     try {
-      final fetchedArticles = await ApiService.fetchArticle(categoryId);
+      List<Article> fetchedArticles =
+          await ApiService.fetchArticlesByCategory(categoryId);
+
+      // Tri des articles en fonction du type de tri actuel
+      fetchedArticles.sort((a, b) {
+        if (isAscending) {
+          return a.creationDate.compareTo(b.creationDate);
+        } else {
+          return b.creationDate.compareTo(a.creationDate);
+        }
+      });
 
       setState(() {
-        articles = [fetchedArticles];
+        articles = fetchedArticles;
+        filteredArticles = fetchedArticles;
       });
     } catch (error) {
       print('Failed to fetch articles by category: $error');
     }
+  }
+
+  void filterArticles() {
+    setState(() {
+      if (searchKeyword.isEmpty) {
+        // Aucun mot-clé de recherche, afficher tous les articles non filtrés
+        filteredArticles = articles;
+      } else {
+        // Filtrer les articles en fonction du mot-clé de recherche
+        filteredArticles = articles
+            .where((article) =>
+                article.title
+                    .toLowerCase()
+                    .contains(searchKeyword.toLowerCase()) ||
+                (article.summary != null &&
+                    article.summary!
+                        .toLowerCase()
+                        .contains(searchKeyword.toLowerCase())))
+            .toList();
+      }
+    });
   }
 
   @override
@@ -60,83 +95,102 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey[800],
-        title: Text('Mon Site'),
-        actions: [
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 8),
-            child: DropdownButton<Category>(
-              value: selectedCategory,
-              items: categories.map((Category category) {
-                return DropdownMenuItem<Category>(
-                  value: category,
-                  child: Text(
-                    category.name,
-                    style: TextStyle(color: Colors.white),
-                  ),
-                );
-              }).toList(),
-              onChanged: (Category? value) {
-                if (value != null) {
-                  selectCategory(value);
-                }
-              },
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 8),
-            child: DropdownButton<String>(
-              items:
-                  ['Trier croissant', 'Trier décroissant'].map((String option) {
-                return DropdownMenuItem<String>(
-                  value: option,
-                  child: Text(
-                    option,
-                    style: TextStyle(color: Colors.white),
-                  ),
-                );
-              }).toList(),
-              onChanged: (String? value) {
-                // Handle sort option change
-              },
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 8),
-            child: TextField(
-              decoration: InputDecoration(
-                hintText: 'Filtrer',
-                filled: true,
-                fillColor: Colors.grey[700],
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(4),
-                  borderSide: BorderSide.none,
-                ),
-                prefixIcon: Icon(
-                  Icons.search,
-                  color: Colors.grey[300],
-                ),
-              ),
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-        ],
+        title: Text('MiniPress.app'),
       ),
-      body: Container(
-        color: Colors.grey[200],
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Liste des articles',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
+      body: Column(
+        children: [
+          Container(
+            padding: EdgeInsets.all(8),
+            color: Colors.grey[800],
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  width: 200,
+                  child: DropdownButton<Category>(
+                    value: selectedCategory,
+                    isExpanded: true,
+                    items: categories.map((Category category) {
+                      return DropdownMenuItem<Category>(
+                        value: category,
+                        child: Text(
+                          category.name,
+                          style: TextStyle(color: Colors.blue),
+                        ),
+                      );
+                    }).toList(),
+                    onChanged: (Category? value) {
+                      if (value != null) {
+                        selectCategory(value);
+                      }
+                    },
+                  ),
                 ),
-              ),
-              SizedBox(height: 16),
-              Expanded(
+                Container(
+                  width: 200,
+                  child: DropdownButton<String>(
+                    isExpanded: true,
+                    items: [
+                      'Trie ascendant',
+                      'Trie descendant',
+                    ].map((String option) {
+                      return DropdownMenuItem<String>(
+                        value: option,
+                        child: Text(
+                          option,
+                          style: TextStyle(color: Colors.blue),
+                        ),
+                      );
+                    }).toList(),
+                    onChanged: (String? value) {
+                      if (value == 'Trie ascendant') {
+                        setState(() {
+                          isAscending = true;
+                        });
+                      } else if (value == 'Trie descendant') {
+                        setState(() {
+                          isAscending = false;
+                        });
+                      }
+                      fetchArticlesByCategory(selectedCategory!.id);
+                    },
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    margin: EdgeInsets.symmetric(horizontal: 8),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: 'Filtrer les articles',
+                        filled: true,
+                        fillColor: Colors.grey,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(4),
+                          borderSide: BorderSide.none,
+                        ),
+                        prefixIcon: Icon(
+                          Icons.search,
+                          color: Colors.grey[300],
+                        ),
+                      ),
+                      style: TextStyle(color: Color.fromARGB(255, 37, 0, 0)),
+                      onChanged: (value) {
+                        setState(() {
+                          searchKeyword = value;
+                        });
+                        filterArticles();
+                      },
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: Container(
+              color: Color.fromARGB(255, 125, 3, 3),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
                 child: GridView.builder(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
@@ -144,9 +198,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     crossAxisSpacing: 8,
                     childAspectRatio: 0.75,
                   ),
-                  itemCount: articles.length,
+                  itemCount: filteredArticles.length,
                   itemBuilder: (context, index) {
-                    final article = articles[index];
+                    final article = filteredArticles[index];
                     return GestureDetector(
                       onTap: () {
                         Navigator.push(
@@ -193,9 +247,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                 ),
               ),
-            ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
