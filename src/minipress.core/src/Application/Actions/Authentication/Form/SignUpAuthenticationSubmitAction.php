@@ -13,6 +13,7 @@ final class SignUpAuthenticationSubmitAction extends AuthenticationAction
     protected function action(): Response
     {
         $data = $this->request->getParsedBody();
+        var_dump($data);
 
         $user = User::where('email', $data['email'])->first();
         if (!is_null($user)) {

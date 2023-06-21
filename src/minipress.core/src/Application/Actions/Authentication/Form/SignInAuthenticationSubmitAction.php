@@ -14,15 +14,14 @@ final class SignInAuthenticationSubmitAction extends AuthenticationAction
         $data = $this->request->getParsedBody();
 
         $email = filter_var($data['email'], FILTER_SANITIZE_EMAIL);
-        $password = filter_var($data['password'], FILTER_SANITIZE_STRING);
+        $password = $data['password'];
 
         $result = $this->service->attempt($email, $password);
 
         if (!$result) {
-            $this->response = $this->response->withStatus(401);
-            $this->response->getBody()->write('Invalid credentials');
+            return $this->response->withHeader('Location', '/admin/auth/signin')->withStatus(302);
         } else {
-            $this->response->getBody()->write('Login successful');
+            return $this->response->withHeader('Location', '/admin')->withStatus(302);
         }
 
         return $this->response;
