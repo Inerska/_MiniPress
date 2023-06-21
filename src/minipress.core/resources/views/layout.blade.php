@@ -34,7 +34,8 @@
 
             <div class="mb-10 text-center">
                 @if($authService->check())
-                    <li><a href="/admin/auth/signout" class="mb-10 bg-red-500 text-white rounded p-2">Logout</a></li>
+                    <span>Vous êtes connecté en tant que {{ $authService->user()->email }}</span>
+                    <li><a href="/admin/auth/signout" class="mb-10 bg-red-500 text-white rounded p-2 mt-5">Logout</a></li>
                 @else
                     <li><a href="/admin/auth/signin">Login</a></li>
                     <li><a href="/admin/auth/signup">Register</a></li>
