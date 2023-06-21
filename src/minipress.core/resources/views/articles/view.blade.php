@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="flex flex-col">
+    <div class="flex flex-col w-full">
         <table id="myTable" class="w-full divide-y divide-gray-200">
             <thead class="bg-gray-50 p-5">
             <tr>

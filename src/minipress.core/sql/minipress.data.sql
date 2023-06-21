@@ -8,10 +8,23 @@ VALUES ('Catégorie 1'),
        ('Catégorie 3');
 
 INSERT INTO articles (titre, resume, contenu, auteur_id)
-VALUES ('Titre Article 1', 'Résumé Article 1', 'Contenu Article 1', 1),
-       ('Titre Article 2', 'Résumé Article 2', 'Contenu Article 2', 1),
-       ('Titre Article 3', 'Résumé Article 3', 'Contenu Article 3', 2),
-       ('Titre Article 4', 'Résumé Article 4', 'Contenu Article 4', 2);
+VALUES ('Titre Article 1',
+        'Résumé Article 1',
+        '# Titre \n\n Contenu du premier paragraphe. \n\n Contenu du deuxième paragraphe. \n\n Contenu du troisième paragraphe.',
+        1),
+       ('Titre Article 2',
+        'Résumé Article 2',
+        '# Titre \n\n Contenu du premier paragraphe. \n\n Contenu du deuxième paragraphe. \n\n Contenu du troisième paragraphe.',
+        1),
+       ('Titre Article 3',
+        'Résumé Article 3',
+        '# Titre \n\n Contenu du premier paragraphe. \n\n Contenu du deuxième paragraphe. \n\n Contenu du troisième paragraphe.',
+        2),
+       ('Titre Article 4',
+        'Résumé Article 4',
+        '# Titre \n\n Contenu du premier paragraphe. \n\n Contenu du deuxième paragraphe. \n\n Contenu du troisième paragraphe.',
+        2);
+
 
 INSERT INTO article_categories (article_id, category_id)
 VALUES (1, 1),

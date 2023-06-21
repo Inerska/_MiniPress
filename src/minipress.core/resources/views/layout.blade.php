@@ -24,17 +24,18 @@
                         d="M2.74951 22.381C2.2827 21.3799 2.71581 20.19 3.71689 19.7231L14.5926 14.6517C15.5937 14.1849 16.7836 14.618 17.2504 15.6191C17.7172 16.6202 17.2841 17.8101 16.2831 18.277L5.40736 23.3484C4.40628 23.8152 3.21632 23.3821 2.74951 22.381Z"
                         fill="currentColor"/>
             </svg>
-            <h1 class="text-xl text-gray-700 font-bold">Admin</h1>
+            <h1 class="text-xl text-gray-700 font-bold">Panel d'administration</h1>
         </a>
         <ul class="font-semibold text-gray-700 mt-4 hover:text-gray-900 transition duration-150 h-full flex justify-between flex-col">
-            <div>
-                <li><a href="/admin/articles">Articles</a></li>
-                <li><a href="/admin/categories">Catégories</a></li>
+            <div class="text-right w-full">
+                <li class="hover:bg-gray-700 hover:text-white transition duration-150 ease-in-out"><a href="/admin/articles">Articles</a></li>
+                <li class="hover:bg-gray-700 hover:text-white transition duration-150 ease-in-out"><a href="/admin/categories">Catégories</a></li>
             </div>
 
-            <div>
+            <div class="mb-10 text-center">
                 @if($authService->check())
-                    <li><a href="/admin/auth/signout">Logout</a></li>
+                    <span>Vous êtes connecté en tant que {{ $authService->user()->email }}</span>
+                    <li><a href="/admin/auth/signout" class="mb-10 bg-red-500 text-white rounded p-2 mt-5">Logout</a></li>
                 @else
                     <li><a href="/admin/auth/signin">Login</a></li>
                     <li><a href="/admin/auth/signup">Register</a></li>
