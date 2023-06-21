@@ -29,6 +29,7 @@
         <ul class="font-semibold text-gray-700 mt-4 hover:text-gray-900 transition duration-150 h-full flex justify-between flex-col">
             <div>
                 <li><a href="/admin/articles">Articles</a></li>
+                <li><a href="/admin/categories">Catégories</a></li>
             </div>
 
             <div>

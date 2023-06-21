@@ -62,6 +62,9 @@ return function (App $app) {
         // Display all articles
         $routeCollectorProxy->get('/articles', DisplayArticlesAction::class);
 
+        // DIsplay all categories
+        $routeCollectorProxy->get('/categories', DisplayCategoriesAction::class);
+
         // Authentication
         $routeCollectorProxy->group('/auth', function (RouteCollectorProxy $authenticationRouteCollectorProxy) {
             // Signin
