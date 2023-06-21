@@ -27,9 +27,9 @@
             <h1 class="text-xl text-gray-700 font-bold">Panel d'administration</h1>
         </a>
         <ul class="font-semibold text-gray-700 mt-4 hover:text-gray-900 transition duration-150 h-full flex justify-between flex-col">
-            <div>
-                <li><a href="/admin/articles">Articles</a></li>
-                <li><a href="/admin/categories">Catégories</a></li>
+            <div class="text-right w-full">
+                <li class="hover:bg-gray-700 hover:text-white transition duration-150 ease-in-out"><a href="/admin/articles">Articles</a></li>
+                <li class="hover:bg-gray-700 hover:text-white transition duration-150 ease-in-out"><a href="/admin/categories">Catégories</a></li>
             </div>
 
             <div>
