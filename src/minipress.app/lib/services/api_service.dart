@@ -4,22 +4,20 @@ import 'package:todo_list_v1/models/article.dart';
 import 'package:todo_list_v1/models/category.dart';
 
 class ApiService {
+  static const String baseUrl = 'http://127.0.0.1:8080/api/v1';
+
   static Future<List<Article>> fetchArticlesByCategory(int categoryId) async {
     final response = await http.get(
-      Uri.http('127.0.0.1:8080', '/api/v1/categories/$categoryId/articles'),
+      Uri.parse('$baseUrl/categories/$categoryId/articles'),
     );
 
     final data = json.decode(response.body);
 
-    print(data);
-
-    if (data['statusCode'] == 200) {
+    if (response.statusCode == 200) {
       final articlesData = data['data'] as List<dynamic>;
       final articles = articlesData
           .map((articleData) => Article.fromJson(articleData))
           .toList();
-
-      print("Articles : $articles");
 
       return articles;
     } else {
@@ -29,7 +27,7 @@ class ApiService {
 
   static Future<List<Category>> fetchCategories() async {
     final response = await http.get(
-      Uri.parse('http://127.0.0.1:8080/api/v1/categories'),
+      Uri.parse('$baseUrl/categories'),
     );
 
     if (response.statusCode == 200) {
@@ -44,23 +42,19 @@ class ApiService {
     }
   }
 
-  // Méthode statique pour récupérer un article spécifique
   static Future<Article> fetchArticle(int articleId) async {
     final response = await http.get(
-      Uri.parse('http://127.0.0.1:8080/api/v1/articles/$articleId'),
+      Uri.parse('$baseUrl/articles/$articleId'),
     );
 
     final data = json.decode(response.body);
 
     if (response.statusCode == 200) {
       final articleData = data['data'];
-      final article = Article.fromJson(
-          articleData); // Convertit les données en un objet Article
-      print(article);
-      return article; // Retourne l'article
+      final article = Article.fromJson(articleData);
+      return article;
     } else {
-      throw Exception(
-          'Failed to fetch article'); // Lance une exception si la requête a échoué
+      throw Exception('Failed to fetch article');
     }
   }
 }
