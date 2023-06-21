@@ -1,6 +1,6 @@
-@extends('layout')
 
-@section('content')
+
+<?php $__env->startSection('content'); ?>
 
     <div class="flex flex-col w-full">
         <table id="myTable" class="w-full divide-y divide-gray-200">
@@ -8,11 +8,11 @@
             <tr>
                 <th scope="col"
                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
-                    Id
+                    Titre
                 </th>
                 <th scope="col"
                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
-                    Libellé
+                    Date de création
                 </th>
             </tr>
             </thead>
@@ -47,4 +47,6 @@
             });
         });
     </script>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/resources/views/categories/view.blade.php ENDPATH**/ ?>
