@@ -13,6 +13,7 @@ use App\Application\Actions\Authentication\Form\SignUpAuthenticationSubmitAction
 use App\Application\Actions\Authentication\SignInAuthenticationAction;
 use App\Application\Actions\Authentication\SignOutAuthenticationAction;
 use App\Application\Actions\Authentication\SignUpAuthenticationAction;
+use App\Application\Actions\Category\DisplayCategoriesAction;
 use App\Application\Actions\Category\ListCategoriesAction;
 use App\Application\Actions\Category\ListCategoryArticlesAction;
 use App\Application\Actions\IndexAdminAction;
