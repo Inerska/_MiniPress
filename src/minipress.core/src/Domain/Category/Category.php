@@ -12,7 +12,9 @@ class Category extends Model
 {
     protected $table = 'categories';
 
-    protected $fillable = ['name'];
+    protected $fillable = ['nom'];
+
+    public $timestamps = false;
 
     public function articles(): BelongsToMany
     {
