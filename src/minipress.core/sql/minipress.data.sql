@@ -3,26 +3,26 @@ VALUES ('John Doe', 'john@example.com', 'hashedpassword1'),
        ('Jane Doe', 'jane@example.com', 'hashedpassword2');
 
 INSERT INTO categories (nom)
-VALUES ('Catégorie 1'),
-       ('Catégorie 2'),
-       ('Catégorie 3');
+VALUES ('Sport'),
+       ('Musique'),
+       ('Technologie');
 
 INSERT INTO articles (titre, resume, contenu, auteur_id)
-VALUES ('Titre Article 1',
-        'Résumé Article 1',
-        '# Titre \n\n Contenu du premier paragraphe. \n\n Contenu du deuxième paragraphe. \n\n Contenu du troisième paragraphe.',
+VALUES ('Les bienfaits du sport',
+        'Découvrez les nombreux avantages de la pratique sportive',
+        'Le sport contribue à améliorer la santé physique et mentale.',
         1),
-       ('Titre Article 2',
-        'Résumé Article 2',
-        '# Titre \n\n Contenu du premier paragraphe. \n\n Contenu du deuxième paragraphe. \n\n Contenu du troisième paragraphe.',
+       ('La musique c'est important',
+        'Explorez l''influence de la musique sur notre humeur et nos émotions',
+        'La musique peut avoir un effet apaisant et stimulant.',
         1),
-       ('Titre Article 3',
-        'Résumé Article 3',
-        '# Titre \n\n Contenu du premier paragraphe. \n\n Contenu du deuxième paragraphe. \n\n Contenu du troisième paragraphe.',
+       ('Les dernières avancées technologiques',
+        'Découvrez les innovations technologiques les plus récentes',
+        'Les nouvelles technologies transforment notre facon de vivre.',
         2),
-       ('Titre Article 4',
-        'Résumé Article 4',
-        '# Titre \n\n Contenu du premier paragraphe. \n\n Contenu du deuxième paragraphe. \n\n Contenu du troisième paragraphe.',
+       ('Les meilleurs gadgets high-tech',
+        'Explorez les derniers gadgets high-tech sur le marché',
+        'Ces gadgets révolutionnaires rendent notre vie plus pratique et divertissante.',
         2);
 
 
