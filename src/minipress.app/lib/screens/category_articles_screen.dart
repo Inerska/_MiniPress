@@ -12,32 +12,27 @@ class CategoryArticlesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-            'Articles - $categoryId'), // Affiche le titre de la catégorie dans la barre de navigation
+        title: Text('Articles - $categoryId'),
       ),
       body: FutureBuilder<List<Article>>(
-        future: ApiService.fetchArticlesByCategory(
-            categoryId), // Récupère la liste des articles par catégorie
+        future: ApiService.fetchArticlesByCategory(categoryId),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             // Si les données sont disponibles
-            final articles = snapshot.data!; // Obtient la liste d'articles
+            final articles = snapshot.data!;
             return ListView.builder(
               itemCount: articles.length,
               itemBuilder: (context, index) {
                 final article = articles[index];
                 return ListTile(
-                  title: Text(article
-                      .title), // Affiche le titre de l'article dans la liste
+                  title: Text(article.title),
                   onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => ArticleScreen(
-                          articleId: article
-                              .id, // Passe l'ID de l'article à l'écran de l'article
-                          articleTitle: article
-                              .title, // Passe le titre de l'article à l'écran de l'article
+                          articleId: article.id,
+                          articleTitle: article.title,
                         ),
                       ),
                     );
@@ -46,15 +41,12 @@ class CategoryArticlesScreen extends StatelessWidget {
               },
             );
           } else if (snapshot.hasError) {
-            // Si une erreur s'est produite lors de la récupération des articles
             return Center(
-              child: Text(
-                  'Error: ${snapshot.error}'), // Affiche un message d'erreur
+              child: Text('Error: ${snapshot.error}'),
             );
           }
           return Center(
-            child:
-                CircularProgressIndicator(), // Affiche un indicateur de chargement en attendant les données
+            child: CircularProgressIndicator(),
           );
         },
       ),

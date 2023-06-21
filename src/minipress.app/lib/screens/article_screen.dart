@@ -13,16 +13,14 @@ class ArticleScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Article>(
-      future: ApiService.fetchArticle(
-          articleId), // Récupère l'article à partir de l'API
+      future: ApiService.fetchArticle(articleId),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           // Si les données sont disponibles
-          final article = snapshot.data!; // Obtient l'instance de l'article
+          final article = snapshot.data!;
           return Scaffold(
             appBar: AppBar(
-              title: Text(
-                  articleTitle), // Affiche le titre de l'article dans la barre de navigation
+              title: Text(articleTitle),
             ),
             body: SingleChildScrollView(
               padding: EdgeInsets.all(16.0),
@@ -30,8 +28,7 @@ class ArticleScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    utils.DateUtils.formatDateTime(article
-                        .creationDate), // Formate la date de création de l'article en utilisant la classe utilitaire DateUtils
+                    utils.DateUtils.formatDateTime(article.creationDate),
                     style: TextStyle(
                       color: Colors.grey,
                       fontSize: 14.0,
@@ -39,31 +36,27 @@ class ArticleScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 16.0),
                   Text(
-                    article.title, // Affiche le titre de l'article
+                    article.title,
                     style: TextStyle(
                       fontSize: 20.0,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   SizedBox(height: 16.0),
-                  if (article.summary !=
-                      null) // Vérifie si un résumé est disponible
+                  if (article.summary != null)
                     Text(
-                      article
-                          .summary!, // Affiche le résumé de l'article s'il existe
+                      article.summary!,
                       style: TextStyle(
                         fontSize: 16.0,
                         color: Colors.black54,
                       ),
                     ),
                   SizedBox(height: 16.0),
-                  if (article.content !=
-                      null) // Vérifie si un contenu est disponible
+                  if (article.content != null)
                     Container(
                       margin: EdgeInsets.only(top: 8.0),
                       child: Html(
-                        data: article
-                            .content!, // Affiche le contenu de l'article en utilisant le widget Html pour interpréter le HTML
+                        data: article.content!,
                       ),
                     ),
                 ],
@@ -71,15 +64,10 @@ class ArticleScreen extends StatelessWidget {
             ),
           );
         } else if (snapshot.hasError) {
-          // Si une erreur s'est produite lors de la récupération de l'article
-          return Center(
-              child: Text(
-                  'Error: ${snapshot.error}')); // Affiche un message d'erreur
+          return Center(child: Text('Error: ${snapshot.error}'));
         }
 
-        return Center(
-            child:
-                CircularProgressIndicator()); // Affiche un indicateur de chargement en attendant les données
+        return Center(child: CircularProgressIndicator());
       },
     );
   }
