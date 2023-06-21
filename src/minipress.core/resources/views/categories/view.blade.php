@@ -22,7 +22,7 @@
 
         <a href="/admin/categories/create"
            class="inline-block px-6 py-3 mt-3 text-xs font-medium leading-6 text-center text-white uppercase transition bg-blue-500 rounded shadow ripple hover:shadow-lg hover:bg-blue-600 focus:outline-none">+ Créer
-            un article</a>
+            une catégorie</a>
 
     </div>
 
