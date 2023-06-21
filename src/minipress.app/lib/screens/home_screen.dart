@@ -13,6 +13,9 @@ class _HomeScreenState extends State<HomeScreen> {
   Category? selectedCategory;
   List<Category> categories = [];
   List<Article> articles = [];
+  List<Article> filteredArticles = [];
+  bool isAscending = true;
+  String searchKeyword = '';
 
   @override
   void initState() {
@@ -45,15 +48,46 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<void> fetchArticlesByCategory(int categoryId) async {
     try {
-      final fetchedArticles =
+      List<Article> fetchedArticles =
           await ApiService.fetchArticlesByCategory(categoryId);
+
+      // Tri des articles en fonction du type de tri actuel
+      fetchedArticles.sort((a, b) {
+        if (isAscending) {
+          return a.creationDate.compareTo(b.creationDate);
+        } else {
+          return b.creationDate.compareTo(a.creationDate);
+        }
+      });
 
       setState(() {
         articles = fetchedArticles;
+        filteredArticles = fetchedArticles;
       });
     } catch (error) {
       print('Failed to fetch articles by category: $error');
     }
+  }
+
+  void filterArticles() {
+    setState(() {
+      if (searchKeyword.isEmpty) {
+        // Aucun mot-clé de recherche, afficher tous les articles non filtrés
+        filteredArticles = articles;
+      } else {
+        // Filtrer les articles en fonction du mot-clé de recherche
+        filteredArticles = articles
+            .where((article) =>
+                article.title
+                    .toLowerCase()
+                    .contains(searchKeyword.toLowerCase()) ||
+                (article.summary != null &&
+                    article.summary!
+                        .toLowerCase()
+                        .contains(searchKeyword.toLowerCase())))
+            .toList();
+      }
+    });
   }
 
   @override
@@ -97,8 +131,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: DropdownButton<String>(
                     isExpanded: true,
                     items: [
-                      'Trier croissant',
-                      'Trier décroissant',
+                      'Trie ascendant',
+                      'Trie descendant',
                     ].map((String option) {
                       return DropdownMenuItem<String>(
                         value: option,
@@ -109,7 +143,16 @@ class _HomeScreenState extends State<HomeScreen> {
                       );
                     }).toList(),
                     onChanged: (String? value) {
-                      // Handle sort option change
+                      if (value == 'Trie ascendant') {
+                        setState(() {
+                          isAscending = true;
+                        });
+                      } else if (value == 'Trie descendant') {
+                        setState(() {
+                          isAscending = false;
+                        });
+                      }
+                      fetchArticlesByCategory(selectedCategory!.id);
                     },
                   ),
                 ),
@@ -118,7 +161,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     margin: EdgeInsets.symmetric(horizontal: 8),
                     child: TextField(
                       decoration: InputDecoration(
-                        hintText: 'Filtrer',
+                        hintText: 'Filtrer les articles',
                         filled: true,
                         fillColor: Colors.grey,
                         border: OutlineInputBorder(
@@ -131,6 +174,12 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       style: TextStyle(color: Color.fromARGB(255, 37, 0, 0)),
+                      onChanged: (value) {
+                        setState(() {
+                          searchKeyword = value;
+                        });
+                        filterArticles();
+                      },
                     ),
                   ),
                 ),
@@ -149,9 +198,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     crossAxisSpacing: 8,
                     childAspectRatio: 0.75,
                   ),
-                  itemCount: articles.length,
+                  itemCount: filteredArticles.length,
                   itemBuilder: (context, index) {
-                    final article = articles[index];
+                    final article = filteredArticles[index];
                     return GestureDetector(
                       onTap: () {
                         Navigator.push(
