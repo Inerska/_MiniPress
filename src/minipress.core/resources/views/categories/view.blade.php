@@ -34,8 +34,8 @@
                     dataSrc: 'data'
                 },
                 columns: [
-                    {data: 'titre'},
-                    {data: 'date_creation'}
+                    {data: 'id'},
+                    {data: 'nom'}
                 ],
                 paging: false,
                 searching: false,
