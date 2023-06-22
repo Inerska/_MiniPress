@@ -58,18 +58,11 @@ class _HomeScreenState extends State<HomeScreen> {
     try {
       List<Article> fetchedArticles = await ApiService.fetchAllArticles();
 
-      // Tri des articles en fonction du type de tri actuel
-      fetchedArticles.sort((a, b) {
-        if (isAscending) {
-          return a.creationDate.compareTo(b.creationDate);
-        } else {
-          return b.creationDate.compareTo(a.creationDate);
-        }
-      });
-
       setState(() {
         articles = fetchedArticles;
       });
+
+      updateArticles();
     } catch (error) {
       print('Failed to fetch articles: $error');
     }
@@ -80,21 +73,26 @@ class _HomeScreenState extends State<HomeScreen> {
       List<Article> fetchedArticles =
           await ApiService.fetchArticlesByCategory(categoryId);
 
-      // Tri des articles en fonction du type de tri actuel
-      fetchedArticles.sort((a, b) {
+      setState(() {
+        articles = fetchedArticles;
+      });
+
+      updateArticles();
+    } catch (error) {
+      print('Failed to fetch articles by category: $error');
+    }
+  }
+
+  Future<void> updateArticles() async {
+    setState(() {
+      articles.sort((a, b) {
         if (isAscending) {
           return a.creationDate.compareTo(b.creationDate);
         } else {
           return b.creationDate.compareTo(a.creationDate);
         }
       });
-
-      setState(() {
-        articles = fetchedArticles;
-      });
-    } catch (error) {
-      print('Failed to fetch articles by category: $error');
-    }
+    });
   }
 
   void filterArticles() {
@@ -116,7 +114,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.grey[800],
+        backgroundColor: Colors.purple,
         title: Text('MiniPress.app'),
       ),
       body: Column(
@@ -139,9 +137,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: Text(
                             category.name,
                             style: TextStyle(
-                                color: selectedCategory == category
-                                    ? Colors.blue
-                                    : Colors.black),
+                              color: selectedCategory == category
+                                  ? Colors.blue
+                                  : Colors.black,
+                            ),
                           ),
                         );
                       }).toList(),
@@ -155,6 +154,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   width: 200,
                   child: DropdownButton<String>(
                     isExpanded: true,
+                    value: isAscending ? 'Tri ascendant' : 'Tri descendant',
                     items: [
                       'Tri ascendant',
                       'Tri descendant',
@@ -168,20 +168,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       );
                     }).toList(),
                     onChanged: (String? value) {
-                      if (value == 'Tri ascendant') {
-                        setState(() {
-                          isAscending = true;
-                        });
-                      } else if (value == 'Tri descendant') {
-                        setState(() {
-                          isAscending = false;
-                        });
-                      }
-                      if (selectedCategory!.name == 'Liste d\'articles') {
-                        fetchAllArticles();
-                      } else {
-                        fetchArticlesByCategory(selectedCategory!.id);
-                      }
+                      setState(() {
+                        isAscending = value == 'Tri ascendant';
+                      });
+                      updateArticles();
                     },
                   ),
                 ),
