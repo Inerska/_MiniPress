@@ -16,6 +16,7 @@ CREATE TABLE articles
     contenu       TEXT         NOT NULL,
     date_creation TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     auteur_id     INT,
+    published    BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (auteur_id) REFERENCES auteur (id)
 );
 

@@ -14,7 +14,7 @@ class Article extends Model
 {
     protected $table = 'articles';
 
-    protected $fillable = ['titre', 'resume', 'contenu', 'date_creation', 'auteur_id', 'category_id'];
+    protected $fillable = ['titre', 'resume', 'contenu', 'date_creation', 'auteur_id', 'category_id', 'published'];
 
     public $timestamps = false;
 

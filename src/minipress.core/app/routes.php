@@ -8,6 +8,8 @@ use App\Application\Actions\Article\Form\CreateArticleSubmitAction;
 use App\Application\Actions\Article\GetArticleAction;
 use App\Application\Actions\Article\ListArticlesAction;
 use App\Application\Actions\Article\ListAuthorArticlesAction;
+use App\Application\Actions\Article\PublishArticleAction;
+use App\Application\Actions\Article\UnpublishArticleAction;
 use App\Application\Actions\Authentication\Form\SignInAuthenticationSubmitAction;
 use App\Application\Actions\Authentication\Form\SignUpAuthenticationSubmitAction;
 use App\Application\Actions\Authentication\SignInAuthenticationAction;
@@ -55,6 +57,12 @@ return function (App $app) {
     // Retrieve all authors
     $app->get(API_PREFIX . '/auteurs[/]', ListAuthorsAction::class);
 
+    // Publish an article
+    $app->put(API_PREFIX . '/articles/{id}/publish', PublishArticleAction::class);
+
+    // Unpublish an article
+    $app->put(API_PREFIX . '/articles/{id}/unpublish', UnpublishArticleAction::class);
+
     /**
      * Admin
      */
@@ -63,8 +71,7 @@ return function (App $app) {
         $routeCollectorProxy->get('[/]', IndexAdminAction::class);
 
         // Creation of an article
-        $routeCollectorProxy->get('/articles/create[/]', CreateArticleAction::class)
-            ->addMiddleware(new AuthenticationMiddleware());
+        $routeCollectorProxy->get('/articles/create[/]', CreateArticleAction::class)->addMiddleware(new AuthenticationMiddleware());
 
         // Handle the form submission
         $routeCollectorProxy->post('/articles/create[/]', CreateArticleSubmitAction::class);

@@ -53,4 +53,24 @@ final class ArticleRepository implements IRepository
     {
         return Article::where($column, $value)->get()->toArray();
     }
+
+    public function publish(int $id): void
+    {
+        $article = Article::find($id);
+
+        if ($article) {
+            $article->published = true;
+            $article->save();
+        }
+    }
+
+    public function unpublish(int $id): void
+    {
+        $article = Article::find($id);
+
+        if ($article) {
+            $article->published = false;
+            $article->save();
+        }
+    }
 }
