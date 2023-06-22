@@ -12,8 +12,8 @@
 - [x] **3. Affichage de la liste des articles**
     - [x] 3.1 Création de la page pour afficher la liste des articles
 
-- [ ] **4. Filtrage de la liste des articles par catégorie**
-    - [ ] 4.1 Ajout d'un filtre de catégorie sur la page de liste des articles
+- [x] **4. Filtrage de la liste des articles par catégorie**
+    - [x] 4.1 Ajout d'un filtre de catégorie sur la page de liste des articles
 
 - [x] **5. Création de catégories**
     - [x] 5.1 Création de la page de formulaire pour la création de catégories
