@@ -6,6 +6,7 @@ namespace App\Application\Actions\Author\Form;
 
 use App\Application\Actions\Author\AuthorAction;
 use App\Domain\User\User;
+use App\Infrastructure\Persistence\Service\Identity\AuthenticationStateProviderService;
 use Psr\Http\Message\ResponseInterface as Response;
 
 final class CreateAuthorSubmitAction extends AuthorAction
@@ -18,12 +19,12 @@ final class CreateAuthorSubmitAction extends AuthorAction
             return $this->respondWithData(['error' => 'Invalid form data'], 400);
         }
 
-        if ($formData['username'] === 'admin') {
+        if (AuthenticationStateProviderService::getInstance()->isAdminAccount() === false) {
             return $this->respondWithData(['error' => 'Invalid form data, you must use an admin account'], 400);
         }
 
         $user = User::create([
-            'username' => $formData['username'],
+            'nom' => $formData['username'],
             'password' => password_hash($formData['password'], PASSWORD_BCRYPT),
         ]);
 

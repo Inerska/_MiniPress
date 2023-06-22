@@ -13,6 +13,7 @@ use App\Application\Actions\Authentication\Form\SignUpAuthenticationSubmitAction
 use App\Application\Actions\Authentication\SignInAuthenticationAction;
 use App\Application\Actions\Authentication\SignOutAuthenticationAction;
 use App\Application\Actions\Authentication\SignUpAuthenticationAction;
+use App\Application\Actions\Author\CreateAuthorAction;
 use App\Application\Actions\Author\DisplayAuthorsAction;
 use App\Application\Actions\Author\Form\CreateAuthorSubmitAction;
 use App\Application\Actions\Author\ListAuthorsAction;
@@ -82,6 +83,9 @@ return function (App $app) {
 
         // Display all authors
         $routeCollectorProxy->get('/auteurs[/]', DisplayAuthorsAction::class);
+
+        // Create an author account
+        $routeCollectorProxy->get('/auteurs/create[/]', CreateAuthorAction::class);
 
         // handle the form submission
         $routeCollectorProxy->post('/auteurs/create[/]', CreateAuthorSubmitAction::class);
