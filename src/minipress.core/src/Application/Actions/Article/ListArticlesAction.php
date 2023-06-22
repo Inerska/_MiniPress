@@ -25,6 +25,7 @@ final class ListArticlesAction extends ArticleAction
                     'date_creation' => $article['date_creation'],
                     'auteur_id' => $article['auteur_id'],
                     'url' => "/articles/{$article['id']}",
+                    'published' => $article['published'],
                 ];
             }, $articles);
 

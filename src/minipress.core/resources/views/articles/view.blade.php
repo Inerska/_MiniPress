@@ -58,6 +58,10 @@
                     </th>
                     <th scope="col"
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Statut
+                    </th>
+                    <th scope="col"
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                         Action
                     </th>
                 </tr>
@@ -88,10 +92,20 @@
                     {data: 'titre'},
                     {data: 'date_creation'},
                     {
+                        data: 'published',
+                        render: function (data, type, row) {
+                            return data ? 'Publié' : 'Non publié';
+                        }
+                    },
+                    {
                         data: null,
                         render: function (data, type, row) {
                             const id = row.url.split('/')[2];
-                            return `<button class="publish-button bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" data-id="${id}">Publish/Unpublish</button>`;
+                            if (row.published) {
+                                return `<button class="unpublish-button bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" data-id="${id}">Retirer</button>`;
+                            } else {
+                                return `<button class="publish-button bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" data-id="${id}">Publier</button>`;
+                            }
                         }
                     },
                 ],
