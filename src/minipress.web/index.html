@@ -8,50 +8,49 @@
 </head>
 <body>
 
-<div class="flex flex-col min-h-screen">
+<div id="mainPage" class="flex flex-col min-h-screen">
     <!-- Navbar -->
     <nav class="bg-gray-800">
         <div class="container mx-auto px-4">
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center">
-                    <a href="#" class="text-white text-xl font-semibold">Mon Site</a>
+                    <a href="#" class="text-white text-xl font-semibold">MiniPress</a>
                 </div>
                 <div class="flex items-center">
                     <div class="relative mr-4">
                         <select id="categories" class="block appearance-none bg-gray-700 border border-gray-600 text-gray-300 px-4 py-2 rounded-md pr-8">
-                            <option>Toutes</option>
+                            <option value="none">Toutes</option>
                             <!-- Catégories -->
                         </select>
                         <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-300">
                             <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                <path
-                                        d="M10 12l-6-6-1 1 7 7 7-7-1-1-6 6zm0 2l6-6 1 1-7 7-7-7-1-1 6 6zm0 2l-6-6-1 1 7 7 7-7-1-1-6 6z"
-                                ></path>
+                                <path d="M10 12l-6-6-1 1 7 7 7-7-1-1-6 6zm0 2l6-6 1 1-7 7-7-7-1-1 6 6zm0 2l-6-6-1 1 7 7 7-7-1-1-6 6z"></path>
                             </svg>
                         </div>
                     </div>
                     <div class="relative mr-4">
                         <select id="sort" class="block appearance-none bg-gray-700 border border-gray-600 text-gray-300 px-4 py-2 rounded-md pr-8">
+                            <option value="none">Aucun tri</option>
                             <option value="asc">Trier ascendant</option>
                             <option value="desc">Trier descendant</option>
                         </select>
                         <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-300">
                             <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                <path
-                                        d="M10 12l-6-6-1 1 7 7 7-7-1-1-6 6zm0 2l6-6 1 1-7 7-7-7-1-1 6 6zm0 2l-6-6-1 1 7 7 7-7-1-1-6 6z"
-                                ></path>
+                                <path d="M10 12l-6-6-1 1 7 7 7-7-1-1-6 6zm0 2l6-6 1 1-7 7-7-7-1-1 6 6zm0 2l-6-6-1 1 7 7 7-7-1-1-6 6z"></path>
                             </svg>
                         </div>
                     </div>
-                    <input
-                            type="text"
-                            class="bg-gray-700 border border-gray-600 text-gray-300 px-4 py-2 rounded-md"
-                            placeholder="Filtrer"
-                    />
+                    <input id="filter" type="text" class="bg-gray-700 border border-gray-600 text-gray-300 px-4 py-2 rounded-md" placeholder="Filtrer" />
+                    <div class="flex items-center ml-2">
+                        <input id="include-content" type="checkbox" class="mr-1" />
+                        <label for="include-content" class="text-gray-300">Inclure contenu</label>
+                    </div>
+                    <button id="search" class="ml-2 bg-gray-700 border border-gray-600 text-gray-300 px-4 py-2 rounded-md">Rechercher</button>
                 </div>
             </div>
         </div>
     </nav>
+
 
     <!-- Content -->
     <div class="flex-1 bg-gray-200">
@@ -63,6 +62,29 @@
         </div>
     </div>
 </div>
+
+<div id="articlePage" class="flex flex-col min-h-screen" style="display:none">
+    <!-- Navbar -->
+    <nav class="bg-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <a href="#" class="text-white text-xl font-semibold">MiniPress</a>
+                </div>
+                <div class="flex items-center">
+                    <button id="showAllArticles" class="bg-gray-700 text-gray-300 px-4 py-2 rounded-md mr-2">Liste des articles</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Content -->
+    <div class="flex-1 bg-gray-200 flex justify-center">
+        <div id="articleDetails" class="max-w-2xl mx-auto py-8">
+        </div>
+    </div>
+</div>
+
 
 </body>
 </html>
