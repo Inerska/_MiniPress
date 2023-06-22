@@ -44,7 +44,7 @@ final class AuthenticationStateProviderService implements AuthenticationStatePro
     public function isAdminAccount() {
         if (isset($_SESSION['user_id'])) {
             $user = User::find($_SESSION['user_id']);
-            if ($user->username === 'admin') {
+            if ($user->nom === 'admin') {
                 return true;
             }
         }

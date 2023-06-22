@@ -25,8 +25,10 @@
     <div class="flex flex-col w-full p-6 space-y-4 bg-white rounded-lg shadow-md">
         <div class="flex items-center justify-between">
             <h1 class="text-lg font-bold">Auteurs</h1>
+
             <a href="/admin/authors/create"
-               class="inline-block px-6 py-2 text-xs font-medium text-center text-white uppercase transition bg-blue-500 rounded ripple hover:shadow-lg hover:bg-blue-600 focus:outline-none">
+               class="inline-block px-6 py-2 text-xs font-medium text-center text-white uppercase transition bg-blue-500 rounded-md shadow ripple hover:shadow-lg hover:bg-blue-600 focus:outline-none {{ !$authService->isAdminAccount() ? 'opacity-50 cursor-not-allowed' : '' }}"
+                    {{ !$authService->isAdminAccount() ? 'onclick=event.preventDefault()' : '' }}>
                 + Créer un auteur
             </a>
         </div>
