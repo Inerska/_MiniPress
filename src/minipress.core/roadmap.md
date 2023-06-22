@@ -6,8 +6,8 @@
     - [x] 1.1 Création de la page de formulaire pour la saisie de l'article
     - [x] 1.2 Traitement des données du formulaire et stockage dans la base de données
 
-- [ ] **2. Association d'un article à une catégorie**
-    - [ ] 2.1 Ajout d'une liste déroulante des catégories existantes sur le formulaire de création d'article
+- [x] **2. Association d'un article à une catégorie**
+    - [x] 2.1 Ajout d'une liste déroulante des catégories existantes sur le formulaire de création d'article
 
 - [x] **3. Affichage de la liste des articles**
     - [x] 3.1 Création de la page pour afficher la liste des articles
