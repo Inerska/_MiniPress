@@ -1,10 +1,10 @@
 class Article {
-  final int id; // ID de l'article
-  final String title; // Titre de l'article
-  final String creationDate; // Date de création de l'article
-  final String author; // Auteur de l'article
-  final String? summary; // Résumé de l'article (optionnel)
-  final String? content; // Contenu de l'article (optionnel)
+  final int id;
+  final String title;
+  final String creationDate;
+  final String author;
+  final String? summary;
+  final String? content;
 
   Article({
     this.id = 0,

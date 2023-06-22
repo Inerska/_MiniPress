@@ -112,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
         articles = filteredArticles;
       });
 
-      updateArticles(); // Ajout de cette ligne pour trier les articles filtrés
+      updateArticles();
     }
   }
 
@@ -234,8 +234,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             builder: (context) => ArticleScreen(
                               articleId: article.id,
                               articleTitle: article.title,
-                              searchKeyword:
-                                  searchKeyword, // Passage du mot-clé de recherche à l'écran de l'article
+                              searchKeyword: searchKeyword,
                             ),
                           ),
                         );
