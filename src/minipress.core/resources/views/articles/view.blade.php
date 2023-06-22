@@ -21,8 +21,11 @@
         </table>
 
         <a href="/admin/articles/create"
-           class="inline-block px-6 py-3 mt-3 text-xs font-medium leading-6 text-center text-white uppercase transition bg-blue-500 rounded shadow ripple hover:shadow-lg hover:bg-blue-600 focus:outline-none">+ Créer
-            un article</a>
+           class="inline-block px-6 py-3 mt-3 text-xs font-medium leading-6 text-center text-white uppercase transition bg-blue-500 rounded shadow ripple hover:shadow-lg hover:bg-blue-600 focus:outline-none {{ !$authService->check() ? 'opacity-50 cursor-not-allowed' : '' }}"
+                {{ !$authService->check() ? 'onclick=event.preventDefault()' : '' }}>
+            + Créer un article
+        </a>
+
 
     </div>
 
