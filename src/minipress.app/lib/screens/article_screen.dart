@@ -36,9 +36,7 @@ class ArticleScreen extends StatelessWidget {
             markdownContent = article.content!;
           }
 
-          String htmlContent =
-              markdown.markdownToHtml(markdownContent); // Conversion en HTML
-
+          String htmlContent = markdown.markdownToHtml(markdownContent);
           return Scaffold(
             appBar: AppBar(
               title: Text(
@@ -118,8 +116,7 @@ class ArticleScreen extends StatelessWidget {
                       ),
                     ),
                   SizedBox(height: 16.0),
-                  if (htmlContent
-                      .isNotEmpty) // Vérifiez si le contenu HTML est non vide
+                  if (htmlContent.isNotEmpty)
                     Container(
                       margin: EdgeInsets.only(top: 8.0),
                       decoration: BoxDecoration(
@@ -130,8 +127,7 @@ class ArticleScreen extends StatelessWidget {
                         ),
                       ),
                       child: Html(
-                        data:
-                            'Contenu : $htmlContent', // Utilisez le contenu HTML converti
+                        data: 'Contenu : $htmlContent',
                         style: {
                           "body": Style(fontSize: FontSize(20.0)),
                         },
