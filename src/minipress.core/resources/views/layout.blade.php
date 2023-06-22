@@ -22,6 +22,7 @@
         <ul class="space-y-2 mb-8">
             <li><a href="/admin/articles" class="text-gray-700 hover:text-blue-500 transition duration-150 ease-in-out block">Articles</a></li>
             <li><a href="/admin/categories" class="text-gray-700 hover:text-blue-500 transition duration-150 ease-in-out block">Catégories</a></li>
+            <li><a href="/admin/auteurs" class="text-gray-700 hover:text-blue-500 transition duration-150 ease-in-out block">Auteurs</a></li>
         </ul>
         <div class="mt-auto">
             @if($authService->check())

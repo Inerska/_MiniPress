@@ -13,6 +13,9 @@ use App\Application\Actions\Authentication\Form\SignUpAuthenticationSubmitAction
 use App\Application\Actions\Authentication\SignInAuthenticationAction;
 use App\Application\Actions\Authentication\SignOutAuthenticationAction;
 use App\Application\Actions\Authentication\SignUpAuthenticationAction;
+use App\Application\Actions\Author\DisplayAuthorsAction;
+use App\Application\Actions\Author\Form\CreateAuthorSubmitAction;
+use App\Application\Actions\Author\ListAuthorsAction;
 use App\Application\Actions\Category\CreateCategorieAction;
 use App\Application\Actions\Category\DisplayCategoriesAction;
 use App\Application\Actions\Category\Form\CreateCategorySubmitAction;
@@ -48,6 +51,9 @@ return function (App $app) {
     // Retrieve all articles for an author
     $app->get(API_PREFIX . '/auteurs/{id}/articles[/]', ListAuthorArticlesAction::class);
 
+    // Retrieve all authors
+    $app->get(API_PREFIX . '/auteurs[/]', ListAuthorsAction::class);
+
     /**
      * Admin
      */
@@ -73,6 +79,12 @@ return function (App $app) {
 
         // handle the form submission
         $routeCollectorProxy->post('/categories/create[/]', CreateCategorySubmitAction::class);
+
+        // Display all authors
+        $routeCollectorProxy->get('/auteurs[/]', DisplayAuthorsAction::class);
+
+        // handle the form submission
+        $routeCollectorProxy->post('/auteurs/create[/]', CreateAuthorSubmitAction::class);
 
         // Authentication
         $routeCollectorProxy->group('/auth', function (RouteCollectorProxy $authenticationRouteCollectorProxy) {
