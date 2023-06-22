@@ -33,7 +33,7 @@
 - [x] **12. API pour obtenir un article complet**
 - [x] **13. API pour obtenir la liste des articles d'un auteur spécifique**
 - [ ] **14. Fonctionnalité de publication/dépublication des articles**
-- [ ] **15. Création d'utilisateurs par un administrateur**
+- [x] **15. Création d'utilisateurs par un administrateur**
 - [x] **16. Tri de la liste des articles dans l'API**
 
 ## Améliorations supplémentaires
