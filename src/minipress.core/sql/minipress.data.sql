@@ -1,7 +1,17 @@
+SET FOREIGN_KEY_CHECKS = 0;
+
+TRUNCATE TABLE article_categories;
+TRUNCATE TABLE articles;
+TRUNCATE TABLE categories;
+TRUNCATE TABLE auteur;
+
 INSERT INTO auteur (nom, email, mot_de_passe)
 VALUES ('John Doe', 'john@example.com', 'hashedpassword1'),
        ('Jane Doe', 'jane@example.com', 'hashedpassword2')
 ON DUPLICATE KEY UPDATE nom = VALUES(nom), email = VALUES(email), mot_de_passe = VALUES(mot_de_passe);
+
+SET @john_author_id = LAST_INSERT_ID();
+SET @jane_author_id = LAST_INSERT_ID() + 1;
 
 INSERT INTO categories (nom)
 VALUES ('Sport'),
@@ -39,7 +49,7 @@ VALUES
      Phasellus volutpat, tellus eget maximus posuere, erat ipsum pharetra lacus, ut rutrum nulla lectus at augue.\n
      ## Paragraph 3\n
      Etiam cursus, sapien a eleifend gravida, dui purus tristique ipsum, id auctor quam orci non est.',
-     NOW(), 3),
+     NOW(), 2),
 
     ('Article 4', 'Vestibulum consectetur orci non dui maximus.',
      '# Article 4\n
@@ -69,7 +79,7 @@ VALUES
      In quis neque at orci porttitor cursus. Pellentesque volutpat, mi ut varius vehicula, ipsum urna pulvinar nunc, et commodo nisl orci non metus.\n
      ## Paragraph 3\n
      Quisque ullamcorper, felis sit amet egestas pulvinar, est ligula varius eros, non dignissim metus est sed metus.',
-     NOW(), 3),
+     NOW(), 1),
 
     ('Article 7', 'Quisque ullamcorper, felis sit amet egestas pulvinar.',
      '# Article 7\n
