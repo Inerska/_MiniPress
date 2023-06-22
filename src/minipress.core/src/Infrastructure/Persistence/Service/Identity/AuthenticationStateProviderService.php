@@ -32,6 +32,15 @@ final class AuthenticationStateProviderService implements AuthenticationStatePro
         return null;
     }
 
+    public function getUserId()
+    {
+        if (isset($_SESSION['user_id'])) {
+            return $_SESSION['user_id'];
+        }
+
+        return null;
+    }
+
     public function check(): bool
     {
         return isset($_SESSION['user_id']);

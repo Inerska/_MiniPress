@@ -34,19 +34,19 @@ return function (App $app) {
      */
 
     // Retrieve all articles
-    $app->get(API_PREFIX . '/articles', ListArticlesAction::class);
+    $app->get(API_PREFIX . '/articles[/]', ListArticlesAction::class);
 
     // Retrieve article with id
-    $app->get(API_PREFIX . '/articles/{id}', GetArticleAction::class);
+    $app->get(API_PREFIX . '/articles/{id}[/]', GetArticleAction::class);
 
     // Retrieve all categories
-    $app->get(API_PREFIX . '/categories', ListCategoriesAction::class);
+    $app->get(API_PREFIX . '/categories[/]', ListCategoriesAction::class);
 
     // Retrieve all articles for a category
-    $app->get(API_PREFIX . '/categories/{id}/articles', ListCategoryArticlesAction::class);
+    $app->get(API_PREFIX . '/categories/{id}/articles[/]', ListCategoryArticlesAction::class);
 
     // Retrieve all articles for an author
-    $app->get(API_PREFIX . '/auteurs/{id}/articles', ListAuthorArticlesAction::class);
+    $app->get(API_PREFIX . '/auteurs/{id}/articles[/]', ListAuthorArticlesAction::class);
 
     /**
      * Admin
@@ -56,40 +56,40 @@ return function (App $app) {
         $routeCollectorProxy->get('[/]', IndexAdminAction::class);
 
         // Creation of an article
-        $routeCollectorProxy->get('/articles/create', CreateArticleAction::class)
+        $routeCollectorProxy->get('/articles/create[/]', CreateArticleAction::class)
             ->addMiddleware(new AuthenticationMiddleware());
 
         // Handle the form submission
-        $routeCollectorProxy->post('/articles/create', CreateArticleSubmitAction::class);
+        $routeCollectorProxy->post('/articles/create[/]', CreateArticleSubmitAction::class);
 
         // Display all articles
-        $routeCollectorProxy->get('/articles', DisplayArticlesAction::class);
+        $routeCollectorProxy->get('/articles[/]', DisplayArticlesAction::class);
 
         // Display all categories
-        $routeCollectorProxy->get('/categories', DisplayCategoriesAction::class);
+        $routeCollectorProxy->get('/categories[/]', DisplayCategoriesAction::class);
 
         // Create a category
-        $routeCollectorProxy->get('/categories/create', CreateCategorieAction::class);
+        $routeCollectorProxy->get('/categories/create[/]', CreateCategorieAction::class);
 
         // handle the form submission
-        $routeCollectorProxy->post('/categories/create', CreateCategorySubmitAction::class);
+        $routeCollectorProxy->post('/categories/create[/]', CreateCategorySubmitAction::class);
 
         // Authentication
         $routeCollectorProxy->group('/auth', function (RouteCollectorProxy $authenticationRouteCollectorProxy) {
             // Signin
-            $authenticationRouteCollectorProxy->get('/signin', SignInAuthenticationAction::class);
+            $authenticationRouteCollectorProxy->get('/signin[/]', SignInAuthenticationAction::class);
 
             // Handle the form submission
-            $authenticationRouteCollectorProxy->post('/signin', SignInAuthenticationSubmitAction::class);
+            $authenticationRouteCollectorProxy->post('/signin[/]', SignInAuthenticationSubmitAction::class);
 
             // Signout
-            $authenticationRouteCollectorProxy->get('/signout', SignOutAuthenticationAction::class);
+            $authenticationRouteCollectorProxy->get('/signout[/]', SignOutAuthenticationAction::class);
 
             // Signup
-            $authenticationRouteCollectorProxy->get('/signup', SignUpAuthenticationAction::class);
+            $authenticationRouteCollectorProxy->get('/signup[/]', SignUpAuthenticationAction::class);
 
             // Handle the form submission
-            $authenticationRouteCollectorProxy->post('/signup', SignUpAuthenticationSubmitAction::class);
+            $authenticationRouteCollectorProxy->post('/signup[/]', SignUpAuthenticationSubmitAction::class);
         });
     });
 
