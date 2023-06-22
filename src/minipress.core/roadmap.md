@@ -24,8 +24,8 @@
 - [x] **7. Contrôle d'accès pour la création d'articles**
     - [x] 7.1 Mise en place de contrôles d'accès pour s'assurer que seuls les utilisateurs authentifiés peuvent créer des articles
 
-- [ ] **8. Association des auteurs aux articles**
-    - [ ] 8.1 Ajout de la fonctionnalité pour enregistrer l'auteur d'un article lors de sa création
+- [x] **8. Association des auteurs aux articles**
+    - [x] 8.1 Ajout de la fonctionnalité pour enregistrer l'auteur d'un article lors de sa création
 
 - [x] **9. API pour obtenir la liste des catégories**
 - [x] **10. API pour obtenir la liste des articles**
