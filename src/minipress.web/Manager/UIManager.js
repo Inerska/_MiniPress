@@ -32,11 +32,11 @@ export class UIManager {
 
             const date = document.createElement("p");
             date.classList.add("text-gray-700");
-            date.textContent = article.dateCreation;
+            date.textContent = "Date : " + article.dateCreation;
 
             const author = document.createElement("span");
             author.classList.add("absolute", "top-0", "right-0", "bg-gray-300", "text-gray-700", "px-2", "py-1", "rounded-md", "text-xs");
-            author.textContent = "ID: " + article.auteurId;
+            author.textContent = "Auteur : " + article.auteurId;
 
             li.addEventListener("mouseover", () => {
                 li.classList.add("cursor-pointer")
@@ -80,6 +80,7 @@ export class UIManager {
 
     renderArticle(article){
 
+
         const title = document.createElement("h2");
         title.classList.add("text-2xl", "font-semibold", "mb-4", "text-center");
         title.textContent = article.titre;
@@ -90,13 +91,13 @@ export class UIManager {
 
         const resume = document.createElement("p");
         resume.classList.add("text-gray-700", "mb-6", "text-center");
-        resume.textContent = article.resume;
+        resume.innerHTML = this.convertMarkdownHeadersToHTML(article.resume);
 
         const div = document.createElement("div");
         div.classList.add("prose", "text-center");
 
         const content = document.createElement("p");
-        content.textContent = article.contenu;
+        content.innerHTML = this.convertMarkdownHeadersToHTML(article.contenu);
 
         div.appendChild(content);
 
@@ -107,6 +108,11 @@ export class UIManager {
         details.appendChild(div);
         details.appendChild(content);
 
+    }
+
+    convertMarkdownHeadersToHTML(markdown) {
+        const converter = new showdown.Converter();
+        return converter.makeHtml(markdown);
     }
 
 

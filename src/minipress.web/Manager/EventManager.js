@@ -22,4 +22,10 @@ export class EventManager{
 
     }
 
+    addArticleHover(li){
+        li.addEventListener("mouseover", () => {
+            li.classList.add("cursor-pointer")
+        });
+    }
+
 }

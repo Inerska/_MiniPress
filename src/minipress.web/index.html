@@ -5,6 +5,8 @@
     <title>Minipress Web</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script type="module" src="App.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/showdown@1.9.1/dist/showdown.min.js"></script>
+
 </head>
 <body>
 
@@ -42,10 +44,15 @@
                     </div>
                     <input id="filter" type="text" class="bg-gray-700 border border-gray-600 text-gray-300 px-4 py-2 rounded-md" placeholder="Filtrer" />
                     <div class="flex items-center ml-2">
-                        <input id="include-content" type="checkbox" class="mr-1" />
-                        <label for="include-content" class="text-gray-300">Inclure contenu</label>
+                        <input id="include-content" type="checkbox" class="form-checkbox h-4 w-4 text-gray-600 transition duration-150 ease-in-out rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" />
+                        <label for="include-content" class="ml-2 text-gray-400">Inclure contenu</label>
                     </div>
-                    <button id="search" class="ml-2 bg-gray-700 border border-gray-600 text-gray-300 px-4 py-2 rounded-md">Rechercher</button>
+                    <button id="search" class="ml-2 bg-gray-700 border border-gray-600 text-gray-300 px-4 py-2 rounded-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 18l6-6m0 0l-6-6m6 6H4"></path>
+                        </svg>
+                        Rechercher
+                    </button>
                 </div>
             </div>
         </div>
@@ -72,7 +79,9 @@
                     <a href="#" class="text-white text-xl font-semibold">MiniPress</a>
                 </div>
                 <div class="flex items-center">
-                    <button id="showAllArticles" class="bg-gray-700 text-gray-300 px-4 py-2 rounded-md mr-2">Liste des articles</button>
+                    <button id="showAllArticles" class="bg-gray-700 text-gray-300 px-4 py-2 rounded-md mr-2">
+                        Liste des articles
+                    </button>
                 </div>
             </div>
         </div>
