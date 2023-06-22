@@ -2,28 +2,58 @@
 
 <?php $__env->startSection('content'); ?>
 
-    <div class="flex flex-col w-full">
-        <table id="myTable" class="w-full divide-y divide-gray-200">
-            <thead class="bg-gray-50 p-5">
-            <tr>
-                <th scope="col"
-                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
-                    Titre
-                </th>
-                <th scope="col"
-                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
-                    Date de création
-                </th>
-            </tr>
-            </thead>
-            <tbody id="tableBody" class="bg-white divide-y divide-gray-200">
-            </tbody>
-        </table>
+    <style>
+        .loader {
+            border: 16px solid #f3f3f3;
+            border-top: 16px solid #3498db;
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            animation: spin 2s linear infinite;
+        }
 
-        <a href="/admin/categories/create"
-           class="inline-block px-6 py-3 mt-3 text-xs font-medium leading-6 text-center text-white uppercase transition bg-blue-500 rounded shadow ripple hover:shadow-lg hover:bg-blue-600 focus:outline-none">+ Créer
-            une catégorie</a>
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
 
+        #loading {
+            display: none;
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+    </style>
+
+    <div class="flex flex-col w-full p-6 space-y-4 bg-white rounded-lg shadow-md">
+        <div class="flex items-center justify-between">
+            <h1 class="text-lg font-bold">Catégories</h1>
+            <a href="/admin/categories/create"
+               class="inline-block px-6 py-2 text-xs font-medium text-center text-white uppercase transition bg-blue-500 rounded-md shadow ripple hover:shadow-lg hover:bg-blue-600 focus:outline-none">
+                + Créer une catégorie
+            </a>
+        </div>
+
+        <div class="relative">
+            <table id="myTable" class="w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                <tr>
+                    <th scope="col"
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Id
+                    </th>
+                    <th scope="col"
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Libellé
+                    </th>
+                </tr>
+                </thead>
+                <tbody id="tableBody" class="bg-white divide-y divide-gray-200">
+                </tbody>
+            </table>
+            <div id="loading" class="absolute inset-0 flex items-center justify-center">
+                <div class="loader"></div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -31,7 +61,13 @@
             const table = $('#myTable').DataTable({
                 ajax: {
                     url: '/api/v1/categories',
-                    dataSrc: 'data'
+                    dataSrc: 'data',
+                    beforeSend: function () {
+                        $('#loading').show();
+                    },
+                    complete: function () {
+                        $('#loading').hide();
+                    },
                 },
                 columns: [
                     {data: 'id'},
@@ -39,7 +75,7 @@
                 ],
                 paging: false,
                 searching: false,
-                info: false
+                info: false,
             });
 
             table.on('draw.dt', function () {
