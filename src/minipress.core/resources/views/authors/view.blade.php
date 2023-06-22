@@ -41,7 +41,11 @@
                     </th>
                     <th scope="col"
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Username
+                        Nom
+                    </th>
+                    <th scope="col"
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Email
                     </th>
                 </tr>
                 </thead>
@@ -58,7 +62,7 @@
         $(document).ready(function () {
             const table = $('#authorsTable').DataTable({
                 ajax: {
-                    url: '/api/v1/authors',
+                    url: '/api/v1/auteurs',
                     dataSrc: 'data',
                     beforeSend: function () {
                         $('#loading').show();
@@ -69,7 +73,8 @@
                 },
                 columns: [
                     {data: 'id'},
-                    {data: 'username'}
+                    {data: 'nom'},
+                    {data: 'email'},
                 ],
                 paging: false,
                 searching: false,
