@@ -7,8 +7,13 @@ import 'package:todo_list_v1/services/api_service.dart';
 class ArticleScreen extends StatelessWidget {
   final int articleId;
   final String articleTitle;
+  final String searchKeyword;
 
-  ArticleScreen({required this.articleId, required this.articleTitle});
+  ArticleScreen({
+    required this.articleId,
+    required this.articleTitle,
+    this.searchKeyword = '',
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +22,14 @@ class ArticleScreen extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           final article = snapshot.data!;
+          final filteredSummary =
+              searchKeyword.isNotEmpty && article.summary != null
+                  ? article.summary!.replaceAll(
+                      RegExp('($searchKeyword)', caseSensitive: false),
+                      '<b>\$1</b>',
+                    )
+                  : article.summary;
+
           return Scaffold(
             appBar: AppBar(
               title: Text(
@@ -72,15 +85,15 @@ class ArticleScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 16.0),
                   Text(
-                    'Réalisé par auteur numéro ${article.author}',
+                    'Auteur: ${article.author}', // Utilisation de "Auteur" au lieu de "Réalisé par auteur numéro"
                     style: TextStyle(
                       fontSize: 18.0,
                       fontWeight: FontWeight.bold,
-                      color: Colors.orange,
+                      color: Colors.white,
                     ),
                   ),
                   SizedBox(height: 16.0),
-                  if (article.summary != null)
+                  if (filteredSummary != null)
                     Container(
                       padding: EdgeInsets.all(16.0),
                       decoration: BoxDecoration(
@@ -88,7 +101,7 @@ class ArticleScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                       child: Text(
-                        article.summary!,
+                        'Résumé : ${filteredSummary}', // Utilisation de "Résumé" au lieu de "Pour résumer"
                         style: TextStyle(
                           fontSize: 18.0,
                           color: Colors.grey[800],
@@ -107,7 +120,7 @@ class ArticleScreen extends StatelessWidget {
                         ),
                       ),
                       child: Html(
-                        data: article.content!,
+                        data: 'Contenu : ${article.content!}',
                         style: {
                           "body": Style(fontSize: FontSize(20.0)),
                         },

@@ -96,18 +96,24 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void filterArticles() {
-    List<Article> filteredArticles = articles
-        .where((article) =>
-            article.title.toLowerCase().contains(searchKeyword.toLowerCase()) ||
-            (article.summary != null &&
-                article.summary!
-                    .toLowerCase()
-                    .contains(searchKeyword.toLowerCase())))
-        .toList();
+    if (searchKeyword.isEmpty) {
+      if (selectedCategory!.name == 'Liste des Articles') {
+        fetchAllArticles();
+      } else {
+        fetchArticlesByCategory(selectedCategory!.id);
+      }
+    } else {
+      List<Article> filteredArticles = articles
+          .where((article) =>
+              article.title.toLowerCase().contains(searchKeyword.toLowerCase()))
+          .toList();
 
-    setState(() {
-      articles = filteredArticles;
-    });
+      setState(() {
+        articles = filteredArticles;
+      });
+
+      updateArticles(); // Ajout de cette ligne pour trier les articles filtrés
+    }
   }
 
   @override
@@ -228,6 +234,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             builder: (context) => ArticleScreen(
                               articleId: article.id,
                               articleTitle: article.title,
+                              searchKeyword:
+                                  searchKeyword, // Passage du mot-clé de recherche à l'écran de l'article
                             ),
                           ),
                         );
