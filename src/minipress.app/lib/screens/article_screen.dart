@@ -3,6 +3,7 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:todo_list_v1/models/article.dart';
 import 'package:todo_list_v1/utils/date_utils.dart' as utils;
 import 'package:todo_list_v1/services/api_service.dart';
+import 'package:markdown/markdown.dart' as markdown;
 
 class ArticleScreen extends StatelessWidget {
   final int articleId;
@@ -29,6 +30,14 @@ class ArticleScreen extends StatelessWidget {
                       '<b>\$1</b>',
                     )
                   : article.summary;
+
+          String markdownContent = '';
+          if (article.content != null) {
+            markdownContent = article.content!;
+          }
+
+          String htmlContent =
+              markdown.markdownToHtml(markdownContent); // Conversion en HTML
 
           return Scaffold(
             appBar: AppBar(
@@ -85,7 +94,7 @@ class ArticleScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 16.0),
                   Text(
-                    'Auteur: ${article.author}', // Utilisation de "Auteur" au lieu de "Réalisé par auteur numéro"
+                    'Auteur: ${article.author}',
                     style: TextStyle(
                       fontSize: 18.0,
                       fontWeight: FontWeight.bold,
@@ -101,7 +110,7 @@ class ArticleScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                       child: Text(
-                        'Résumé : ${filteredSummary}', // Utilisation de "Résumé" au lieu de "Pour résumer"
+                        'Résumé : ${filteredSummary}',
                         style: TextStyle(
                           fontSize: 18.0,
                           color: Colors.grey[800],
@@ -109,7 +118,8 @@ class ArticleScreen extends StatelessWidget {
                       ),
                     ),
                   SizedBox(height: 16.0),
-                  if (article.content != null)
+                  if (htmlContent
+                      .isNotEmpty) // Vérifiez si le contenu HTML est non vide
                     Container(
                       margin: EdgeInsets.only(top: 8.0),
                       decoration: BoxDecoration(
@@ -120,7 +130,8 @@ class ArticleScreen extends StatelessWidget {
                         ),
                       ),
                       child: Html(
-                        data: 'Contenu : ${article.content!}',
+                        data:
+                            'Contenu : $htmlContent', // Utilisez le contenu HTML converti
                         style: {
                           "body": Style(fontSize: FontSize(20.0)),
                         },
