@@ -35,6 +35,7 @@
 - [ ] **14. Fonctionnalité de publication/dépublication des articles**
 - [x] **15. Création d'utilisateurs par un administrateur**
 - [x] **16. Tri de la liste des articles dans l'API**
+- [] Jeu de données de test avec des lorems, etc.
 
 ## Améliorations supplémentaires
 - [ ] **Implémentation des tests unitaires et fonctionnels**
