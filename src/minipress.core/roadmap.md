@@ -21,8 +21,8 @@
 - [x] **6. Authentification des utilisateurs**
     - [x] 6.1 Création du formulaire d'authentification
 
-- [ ] **7. Contrôle d'accès pour la création d'articles**
-    - [ ] 7.1 Mise en place de contrôles d'accès pour s'assurer que seuls les utilisateurs authentifiés peuvent créer des articles
+- [x] **7. Contrôle d'accès pour la création d'articles**
+    - [x] 7.1 Mise en place de contrôles d'accès pour s'assurer que seuls les utilisateurs authentifiés peuvent créer des articles
 
 - [ ] **8. Association des auteurs aux articles**
     - [ ] 8.1 Ajout de la fonctionnalité pour enregistrer l'auteur d'un article lors de sa création
