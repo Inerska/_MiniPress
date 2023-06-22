@@ -1,11 +1,13 @@
 INSERT INTO auteur (nom, email, mot_de_passe)
 VALUES ('John Doe', 'john@example.com', 'hashedpassword1'),
-       ('Jane Doe', 'jane@example.com', 'hashedpassword2');
+       ('Jane Doe', 'jane@example.com', 'hashedpassword2')
+ON DUPLICATE KEY UPDATE nom = VALUES(nom), email = VALUES(email), mot_de_passe = VALUES(mot_de_passe);
 
 INSERT INTO categories (nom)
 VALUES ('Sport'),
        ('Musique'),
-       ('Technologie');
+       ('Technologie')
+ON DUPLICATE KEY UPDATE nom = VALUES(nom);
 
 INSERT INTO articles (titre, resume, contenu, date_creation, auteur_id)
 VALUES
@@ -87,7 +89,8 @@ VALUES
      Morbi at magna ac neque ultricies aliquet. Aenean ut enim dolor. Maecenas sed sem at dolor bibendum commodo.\n
      ## Paragraph 3\n
      Nunc sed arcu eget quam commodo bibendum. Integer at nisi sed diam faucibus posuere at nec mauris.',
-     NOW(), 2);
+     NOW(), 2)
+ON DUPLICATE KEY UPDATE titre = VALUES(titre), resume = VALUES(resume), contenu = VALUES(contenu), date_creation = VALUES(date_creation), auteur_id = VALUES(auteur_id);
 
 INSERT INTO article_categories (article_id, category_id)
 VALUES (1, 1),
@@ -105,4 +108,5 @@ VALUES (1, 1),
        (7, 1),
        (7, 2),
        (8, 1),
-       (8, 3);
+       (8, 3)
+ON DUPLICATE KEY UPDATE article_id = VALUES(article_id), category_id = VALUES(category_id);
