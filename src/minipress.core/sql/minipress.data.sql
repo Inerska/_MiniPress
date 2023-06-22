@@ -24,9 +24,9 @@ VALUES
     ('Article 1', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
      '# Article 1\n
      ## Paragraph 1\n
-     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ut dictum nisi, quis consequat quam. Sed consectetur erat ac nisi aliquet, a hendrerit leo pellentesque.\n
+     Lorem ipsum dolor sit *amet*, **consectetur** a*dipiscing elit. Vivamus ut dictum nisi, quis consequat quam. Sed consectetur erat ac nisi aliquet, a hendrerit leo pellentesque.\n
      ## Paragraph 2\n
-     Proin non mauris lobortis, hendrerit ligula in, ullamcorper massa. Sed sit amet neque cursus, malesuada lorem et, lacinia elit.\n
+     Proin non mauris lobortis, hendrerit **ligula** in, ullamcorper massa. Sed sit amet neque cursus, malesuada lorem et, lacinia elit.\n
      ## Paragraph 3\n
      Aliquam in nibh id lorem laoreet elementum id eget mi. Quisque in lectus felis.',
      NOW(), 1, 0),
@@ -34,7 +34,7 @@ VALUES
     ('Article 2', 'Proin non mauris lobortis, hendrerit ligula in.',
      '# Article 2\n
      ## Paragraph 1\n
-     Curabitur at elit eu nunc consequat condimentum. Donec aliquam, massa et imperdiet ornare, est eros blandit ex, ut egestas nulla justo sit amet est.\n
+     **Curabitur** at elit eu nunc consequat condimentum. Donec aliquam, massa et imperdiet ornare, est eros blandit ex, ut egestas nulla justo sit amet est.\n
      ## Paragraph 2\n
      Cras in sapien id nisi condimentum aliquet. Suspendisse potenti. Vestibulum consectetur orci non dui maximus, in elementum ligula egestas.\n
      ## Paragraph 3\n
@@ -44,7 +44,7 @@ VALUES
     ('Article 3', 'Donec aliquam, massa et imperdiet ornare.',
      '# Article 3\n
      ## Paragraph 1\n
-     Nullam ac quam non sem varius porta. In id congue ante. Morbi nec erat purus. Donec a condimentum erat.\n
+     Nullam ac quam non **sem varius porta**. In id congue ante. Morbi nec erat purus. Donec a condimentum erat.\n
      ## Paragraph 2\n
      Phasellus volutpat, tellus eget maximus posuere, erat ipsum pharetra lacus, ut rutrum nulla lectus at augue.\n
      ## Paragraph 3\n
@@ -61,10 +61,10 @@ VALUES
      Ut euismod tincidunt est, et porta lorem lobortis id. Integer varius, elit eget laoreet congue, diam nisl convallis diam, sit amet luctus mi neque non quam.',
      NOW(), 1, 0),
 
-    ('Article 5', 'Curabitur at elit eu nunc consequat condimentum.',
+    ('Article 5', '*Curabitur* at elit eu nunc **consequat** condimentum.',
      '# Article 5\n
      ## Paragraph 1\n
-     Cras sollicitudin, justo nec pellentesque feugiat, ligula turpis eleifend mi, at bibendum lacus mi quis libero.\n
+     Cras sollicitudin, **justo nec pellentesque feugiat**, ligula turpis eleifend mi, at bibendum lacus mi quis libero.\n
      ## Paragraph 2\n
      Duis euismod, ligula et commodo dapibus, erat erat iaculis odio, at interdum quam est in lectus.\n
      ## Paragraph 3\n
@@ -84,17 +84,17 @@ VALUES
     ('Article 7', 'Quisque ullamcorper, felis sit amet egestas pulvinar.',
      '# Article 7\n
      ## Paragraph 1\n
-     Nulla consequat, enim sed cursus varius, orci quam iaculis orci, in venenatis magna magna quis magna.\n
+     Nulla consequat, *enim* sed cursus varius, orci quam iaculis orci, in venenatis magna magna quis magna.\n
      ## Paragraph 2\n
      Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Suspendisse sed justo ac nibh gravida suscipit.\n
      ## Paragraph 3\n
      Etiam tincidunt, justo ac porttitor suscipit, est libero consequat nunc, non venenatis risus urna non libero.',
      NOW(), 1, 1),
 
-    ('Article 8', 'Cras sollicitudin, justo nec pellentesque feugiat.',
+    ('Article 8', 'Cras *sollicitudin*, **justo nec pellentesque** feugiat.',
      '# Article 8\n
      ## Paragraph 1\n
-     Sed facilisis, quam sed rutrum pellentesque, dolor urna egestas dolor, eu lobortis massa mi sed nulla.\n
+     Sed facilisis, **quam sed rutrum** pellentesque, dolor urna egestas dolor, eu lobortis massa mi sed nulla.\n
      ## Paragraph 2\n
      Morbi at magna ac neque ultricies aliquet. Aenean ut enim dolor. Maecenas sed sem at dolor bibendum commodo.\n
      ## Paragraph 3\n
