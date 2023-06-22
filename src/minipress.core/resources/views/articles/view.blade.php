@@ -91,11 +91,7 @@
                         data: null,
                         render: function (data, type, row) {
                             const id = row.url.split('/')[2];
-                            if (row.published) {
-                                return `<button class="unpublish-button bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" data-id="${id}">Unpublish</button>`;
-                            } else {
-                                return `<button class="publish-button bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" data-id="${id}">Publish</button>`;
-                            }
+                            return `<button class="publish-button bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" data-id="${id}">Publish/Unpublish</button>`;
                         }
                     },
                 ],
