@@ -3,12 +3,18 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:todo_list_v1/models/article.dart';
 import 'package:todo_list_v1/utils/date_utils.dart' as utils;
 import 'package:todo_list_v1/services/api_service.dart';
+import 'package:markdown/markdown.dart' as markdown;
 
 class ArticleScreen extends StatelessWidget {
   final int articleId;
   final String articleTitle;
+  final String searchKeyword;
 
-  ArticleScreen({required this.articleId, required this.articleTitle});
+  ArticleScreen({
+    required this.articleId,
+    required this.articleTitle,
+    this.searchKeyword = '',
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +23,22 @@ class ArticleScreen extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           final article = snapshot.data!;
+          final filteredSummary =
+              searchKeyword.isNotEmpty && article.summary != null
+                  ? article.summary!.replaceAll(
+                      RegExp('($searchKeyword)', caseSensitive: false),
+                      '<b>\$1</b>',
+                    )
+                  : article.summary;
+
+          String markdownContent = '';
+          if (article.content != null) {
+            markdownContent = article.content!;
+          }
+
+          String htmlContent =
+              markdown.markdownToHtml(markdownContent); // Conversion en HTML
+
           return Scaffold(
             appBar: AppBar(
               title: Text(
@@ -72,15 +94,15 @@ class ArticleScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 16.0),
                   Text(
-                    'Réalisé par auteur numéro ${article.author}',
+                    'Auteur: ${article.author}',
                     style: TextStyle(
                       fontSize: 18.0,
                       fontWeight: FontWeight.bold,
-                      color: Colors.orange,
+                      color: Colors.white,
                     ),
                   ),
                   SizedBox(height: 16.0),
-                  if (article.summary != null)
+                  if (filteredSummary != null)
                     Container(
                       padding: EdgeInsets.all(16.0),
                       decoration: BoxDecoration(
@@ -88,7 +110,7 @@ class ArticleScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                       child: Text(
-                        article.summary!,
+                        'Résumé : ${filteredSummary}',
                         style: TextStyle(
                           fontSize: 18.0,
                           color: Colors.grey[800],
@@ -96,7 +118,8 @@ class ArticleScreen extends StatelessWidget {
                       ),
                     ),
                   SizedBox(height: 16.0),
-                  if (article.content != null)
+                  if (htmlContent
+                      .isNotEmpty) // Vérifiez si le contenu HTML est non vide
                     Container(
                       margin: EdgeInsets.only(top: 8.0),
                       decoration: BoxDecoration(
@@ -107,7 +130,8 @@ class ArticleScreen extends StatelessWidget {
                         ),
                       ),
                       child: Html(
-                        data: article.content!,
+                        data:
+                            'Contenu : $htmlContent', // Utilisez le contenu HTML converti
                         style: {
                           "body": Style(fontSize: FontSize(20.0)),
                         },
