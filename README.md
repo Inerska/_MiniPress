@@ -19,8 +19,9 @@ shéma et données sql : voir dans le dossier sql a la racine de minipress.core
 test du projet : 
 
 minipress.core : localhost:8080/admin
-                 compléter le test de l'api : localhost:8080/api/v1... ?
-                 //ajouter identifiant-mot de passe de deux utilisateurs créés - au moins 2 utilisateurs exigés 
+                 Tester l'api : voir le fichier api.md a la racine du projet
+                 Ps requetes supplémentaires si nécessaires : GET /api/v1/categories/$id, GET /api/v1/articles, GET /api/v1/auteurs
+
 
 minipress.web : 
 
